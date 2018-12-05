@@ -1,0 +1,24 @@
+{
+  "name": "parseliasse",
+  "version": "0.0.1",
+  "description": "Projet de module typescript pour exploitation des données distribuées par le système Eliasse de l'assemblée nationale",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://framagit.org/Asone/parseliasse.git"
+  },
+  "keywords": [
+    "Assemblée-nationale",
+    "assemblee",
+    "nationale",
+    "french",
+    "parlament",
+    "parlement",
+    "open-data"
+  ],
+  "author": "Nelson Herbin <nelson@herbin.info>",
+  "license": "MIT"
+}
