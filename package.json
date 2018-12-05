@@ -2,8 +2,9 @@
   "name": "parseliasse",
   "version": "0.0.1",
   "description": "Projet de module typescript pour exploitation des données distribuées par le système Eliasse de l'assemblée nationale",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -20,5 +21,14 @@
     "open-data"
   ],
   "author": "Nelson Herbin <nelson@herbin.info>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "http": "latest",
+    "node-fetch": "^2.2.0",
+    "typescript": "^3.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^10.7.1",
+    "@types/node-fetch": "^2.1.2",
+  }
 }
