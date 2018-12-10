@@ -1,0 +1,1 @@
+export * from './Amendement.module';
