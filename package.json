@@ -2,8 +2,8 @@
   "name": "parseliasse",
   "version": "1.0.0",
   "description": "Projet de module typescript pour exploitation des données distribuées par le système Eliasse de l'assemblée nationale",
-  "main": "dist/Parseliasse.js",
-  "types:": "dist/ParsEliasse.d.ts",
+  "main": "dist/index.js",
+  "types:": "dist/index.d.ts",
   "scripts": {
     "install": "npm run build",
     "build": "tsc",
