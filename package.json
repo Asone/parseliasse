@@ -1,11 +1,13 @@
 {
   "name": "parseliasse",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Projet de module typescript pour exploitation des données distribuées par le système Eliasse de l'assemblée nationale",
-  "main": "dist/index.js",
+  "main": "dist/Parseliasse.js",
+  "types:": "dist/ParsEliasse.d.ts",
   "scripts": {
+    "install": "npm run build",
     "build": "tsc",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "nyc --reporter=text mocha -r ts-node/register src/**/*.spec.ts --exit"
   },
   "repository": {
     "type": "git",
@@ -18,17 +20,50 @@
     "french",
     "parlament",
     "parlement",
-    "open-data"
+    "open-data",
+    "eliasse",
+    "amendements",
+    "amendments",
+    "France"
   ],
   "author": "Nelson Herbin <nelson@herbin.info>",
   "license": "MIT",
   "dependencies": {
-    "http": "latest",
-    "node-fetch": "^2.2.0",
+    "axios": "^0.18.0",
+    "node-fetch": "^2.3.0",
+    "rxjs": "^6.3.3",
     "typescript": "^3.0.1"
   },
   "devDependencies": {
+    "@types/chai": "^4.1.7",
+    "@types/mocha": "^5.2.5",
+    "@types/nock": "^9.3.0",
     "@types/node": "^10.7.1",
-    "@types/node-fetch": "^2.1.2",
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0",
+    "nock": "^10.0.3",
+    "nyc": "^13.1.0",
+    "ts-node": "^7.0.1"
+  },
+  "nyc": {
+    "include": [
+      "src/**/*.ts"
+    ],
+    "exclude": [
+      "src/**/*.spec.ts"
+    ],
+    "extension": [
+      ".ts",
+      ".tsx"
+    ],
+    "require": [
+      "ts-node/register"
+    ],
+    "reporter": [
+      "text-summary",
+      "html"
+    ],
+    "sourceMap": true,
+    "instrument": true
   }
 }
