@@ -39,7 +39,7 @@ Les dépendances utilisées à ce jour dans le module sont les suivants :
     let amendements: AmendementInterface;
 
     const amendementSubscription: Subscription = eliasse.amdtDerouleur.observe().subscribe((amds: AmendementInterface) => {
-        amendements = adms;
+        amendements = amds;
     });
 ```
 
@@ -53,6 +53,10 @@ le module ParsEliasse n'est pour l'instant qu'un wrapper de sous-modules spécif
     const amdtDerouleur: AmdtDerouleurModule = new AmdtDerouleurModule();
     const prochainADiscuter: ProchainADiscuterModule = new ProchainADiscuterModule();
 ```
+
+### Configuration
+
+Il est possible de configurer chaque module à l'initialisation que ce soit en instanciant chaque module séparemment ou en appelant le module global. 
 
 ### Typages
 
@@ -114,6 +118,6 @@ Module publié sous licence MIT.
 Merci à :
 
 - L'assemblée nationale pour la mise à disposition d'un flux permettant de suivre l'évolution des amendements en temps réel. 
-- A Emmanuel Raviart pour son travail de construction d'outils facilitant l'accès aux données parlementaires ainsi que pour son outil équivalent à [parseliasse en python]()
-- A [Regards Citoyens]() pour son travail quotidien d'évangélisation sur la nécéssité d'ouvrir les données publiques.
+- A Emmanuel Raviart pour son travail de construction d'outils facilitant l'accès aux données parlementaires ainsi que pour son outil équivalent à [parseliasse en python](https://framagit.org/parlement-ouvert/deliasse-daemons/blob/master/aspireliasse.py)
+- A [Regards Citoyens](http://www.regardscitoyens.org) pour son travail quotidien d'évangélisation sur la nécéssité d'ouvrir les données publiques.
 - A la communauté de l'open-data dans son ensemble
