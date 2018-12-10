@@ -4,7 +4,7 @@
  * 
  */
 
-import { ProchainADiscuterInterface } from '../../dist/types/ProchainADiscuter.interface';
+import { ProchainADiscuterInterface } from '../interfaces';
 
 export const ProchainADiscuterFixture: ProchainADiscuterInterface = { 
     prochainADiscuter: { 

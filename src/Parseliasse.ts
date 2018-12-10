@@ -27,16 +27,9 @@ export class Parseliasse{
         root: 'http://eliasse.assemblee-nationale.fr/eliasse/'   
     }
 
-    // // Default parameters for requests
-    // params: ParamsInterface = {
-    //     legislature: 15,
-    //     bibard: 1396,
-    //     organeAbrv: 'AN',
-    //     bibardSuffixe: null,
-    // }
-    
-    constructor(urls?: UrlsInterface){
-        if (urls) this.urls = urls;
+    constructor(urls?: UrlsInterface, params?: any){
+        
+        if (urls) Object.assign(this.urls,urls);
 
         if (this.urls.amendement) this.amendement = new AmendementModule({ url: this.urls.amendement});
         if (this.urls.amdtDerouleur) this.amdtDerouleur = new AmdtDerouleurModule({ url: this.urls.amdtDerouleur});
