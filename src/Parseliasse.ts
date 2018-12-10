@@ -4,7 +4,6 @@
  */
 
 import { AmdtDerouleurModule, DiscussionModule, ProchainADiscuterModule, AmendementModule } from './modules';
-import { UrlsInterface } from './interfaces/Urls.interface';
 import { ParamsInterface, AmendementRequestParams, DiscussionRequestParams, AmdtDerouleurRequestParams } from './interfaces/Params.interface';
 
 
@@ -22,10 +21,10 @@ interface ModulesParams{
 export class Parseliasse{
     
     // Submodules
-    amdtDerouleur?: AmdtDerouleurModule;
-    discussion?: DiscussionModule;
-    prochainADiscuter?: ProchainADiscuterModule;
-    amendement?: AmendementModule;
+    amdtDerouleur: AmdtDerouleurModule = new AmdtDerouleurModule();
+    discussion: DiscussionModule = new DiscussionModule();
+    prochainADiscuter: ProchainADiscuterModule = new ProchainADiscuterModule();
+    amendement: AmendementModule = new AmendementModule();
 
     params: ModulesParams = {
         amendement: {
