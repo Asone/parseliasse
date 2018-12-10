@@ -1,7 +1,7 @@
 import { AmdtDerouleurModule } from './AmdtDerouleur.module';
 import { expect } from 'chai';
 import * as nock from 'nock';
-import { AmdtDerouleurInterface } from '../../../dist/types/AmdtDerouleur.interface';
+import { AmdtDerouleurInterface } from '../../interfaces/AmdtDerouleur.interface';
 import { amdtDerouleurFixture } from '../../fixtures/AmdtDerouleur.fixture';
 
 describe('[AmdtDerouleur] Test suite for AmdtDerouleur module',()=> {
