@@ -1,6 +1,6 @@
 import { Parseliasse } from './Parseliasse';
 import { expect } from 'chai';
-import { UrlsInterface } from '../dist/interfaces/Urls.interface';
+import { UrlsInterface } from './interfaces/Urls.interface';
 describe('[ParsEliasse] Test suite for main ParsEliasse Module', () => {
     let parseliasse: Parseliasse;
 
@@ -13,9 +13,10 @@ describe('[ParsEliasse] Test suite for main ParsEliasse Module', () => {
         expect(parseliasse).is.instanceOf(Parseliasse);
     });
 
-    it('ParsEliasse module should be able to overwrite default urls',() => {
-        const urls: UrlsInterface = {
-            
-        }
-    });
+    // it('ParsEliasse module should be able to overwrite default urls',() => {
+    //     const urls: UrlsInterface = {
+    //         amendement: 'http://www.adloremipsum.com',
+    //         amdtDerouleur:
+    //     }
+    // });
 });
