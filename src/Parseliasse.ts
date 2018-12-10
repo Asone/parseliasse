@@ -5,7 +5,16 @@
 
 import { AmdtDerouleurModule, DiscussionModule, ProchainADiscuterModule, AmendementModule } from './modules';
 import { UrlsInterface } from './interfaces/Urls.interface';
-import { ParamsInterface } from './interfaces/Params.interface';
+import { ParamsInterface, AmendementRequestParams, DiscussionRequestParams, AmdtDerouleurRequestParams } from './interfaces/Params.interface';
+
+
+interface ModulesParams{
+    amendement?: ParamsInterface<AmendementRequestParams>;
+    discussion?: ParamsInterface<DiscussionRequestParams>;
+    amdtDerouleur?: ParamsInterface<AmdtDerouleurRequestParams>;  
+    prochainADiscuter?: ParamsInterface<void>;     
+}
+
 
 /**
  * Main module
@@ -18,26 +27,32 @@ export class Parseliasse{
     prochainADiscuter?: ProchainADiscuterModule;
     amendement?: AmendementModule;
 
-    // List of Urls for modules
-    urls: UrlsInterface = {
-        amendement: 'amendement.do',
-        amdtDerouleur: 'AmdtDerouleur.do',
-        discussion: 'Discussion.do',
-        prochainADiscuter: 'ProchainADiscuter',
-        root: 'http://eliasse.assemblee-nationale.fr/eliasse/'   
+    params: ModulesParams = {
+        amendement: {
+            url: 'http://eliasse.assemblee-nationale.fr/eliasse/amendement.do',
+            cronjob: false
+        },
+        discussion: {
+            url: 'http://eliasse.assemblee-nationale.fr/eliasse/discussion.do',
+            cronjob: false
+        },
+        prochainADiscuter: {
+            url: 'http://eliasse.assemblee-nationale.fr/eliasse/prochainADiscuter.do',
+            cronjob: false
+        },
+        amdtDerouleur: {
+            url: 'http://eliasse.assemblee-nationale.fr/eliasse/AmdtDerouleur.do',
+            cronjob: false
+        } 
     }
 
-    constructor(urls?: UrlsInterface, params?: any){
-        
-        if (urls) Object.assign(this.urls,urls);
+    constructor(params?: ModulesParams){
 
-        if (this.urls.amendement) this.amendement = new AmendementModule({ url: this.urls.amendement});
-        if (this.urls.amdtDerouleur) this.amdtDerouleur = new AmdtDerouleurModule({ url: this.urls.amdtDerouleur});
-        if (this.urls.discussion) this.discussion = new DiscussionModule({ url: this.urls.discussion});
-        if (this.urls.prochainADiscuter) this.prochainADiscuter = new ProchainADiscuterModule({ url: this.urls.prochainADiscuter });
-    }
+        if (params) Object.assign(this.params, params);
 
-    init(){
-
+        if (this.params.amendement) this.amendement = new AmendementModule(this.params.amdtDerouleur);
+        if (this.params.amdtDerouleur) this.amdtDerouleur = new AmdtDerouleurModule(this.params.amdtDerouleur);
+        if (this.params.discussion) this.discussion = new DiscussionModule(this.params.discussion);
+        if (this.params.prochainADiscuter) this.prochainADiscuter = new ProchainADiscuterModule(this.params.prochainADiscuter);
     }
 }
