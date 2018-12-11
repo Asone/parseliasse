@@ -16,7 +16,7 @@ export class AmdtDerouleurModule extends AbstractParseModule<Array<AmdtDerouleur
     amdtDerouleur: Subject<Array<AmdtDerouleurInterface>> = new Subject<Array<AmdtDerouleurInterface>>();
     params: InitParamsInterface<AmdtDerouleurRequestParams> = {
         cronjob: false,
-        url: 'http://eliasse.assemblee-nationale.fr/eliasse/AmdtDerouleur.do',
+        url: 'http://eliasse.assemblee-nationale.fr/eliasse/amdtDerouleur.do',
         requestParams: {
             bibard: 1396,
             bibardSuffixe: null,

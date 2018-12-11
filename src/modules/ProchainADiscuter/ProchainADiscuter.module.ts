@@ -29,7 +29,7 @@ export class ProchainADiscuterModule extends AbstractParseModule<ProchainADiscut
     constructor(params?: ParamsInterface<void>){
         super();
         if (params) Object.assign(this.params, params);
-        if (params && params.cronjob) this.startjob(this.fetch,60);
+        if (params && params.cronjob) this.startjob(this.fetch,10);
     }
     
     /**

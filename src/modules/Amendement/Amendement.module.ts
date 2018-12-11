@@ -5,9 +5,8 @@
 
 import { AmendementsInterface } from '../../interfaces/Amendement.interface';
 import { AbstractParseModule } from '../Abstract';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, of } from 'rxjs';
 import { ParamsInterface, AmendementRequestParams, InitParamsInterface } from '../../interfaces/Params.interface';
-
 export class AmendementModule extends AbstractParseModule<AmendementsInterface>{
     amendement: Subject<AmendementsInterface> = new Subject<AmendementsInterface>();
     params: InitParamsInterface<AmendementRequestParams> = {
@@ -25,7 +24,7 @@ export class AmendementModule extends AbstractParseModule<AmendementsInterface>{
     constructor(params?: ParamsInterface<AmendementRequestParams>){
         super();
         if (params) Object.assign(this.params, params);
-        if(params && params.cronjob) this.startjob(this.fetch,60);
+        if(params && params.cronjob) this.startjob(this.fetch,10);
     }
 
     /**
@@ -33,12 +32,18 @@ export class AmendementModule extends AbstractParseModule<AmendementsInterface>{
      * 
      * @returns Promise<AmendementInterface>
      */
-    fetch = (): Promise<AmendementsInterface> => {
-        const requestParams: string = this.prepare(this.params.requestParams);
-        return this.request(this.params.url + requestParams).then((amendement: AmendementsInterface): AmendementsInterface => {
-            this.amendement.next(amendement);
-            return amendement;
-        });
+    fetch = (ids?: number | Array<number>): Promise<AmendementsInterface> => {
+        let params: AmendementRequestParams = this.params.requestParams;
+        if (ids) params.numAmdt = ids;
+        if (this.params.requestParams.numAmdt) {
+            const requestParams: string = this.prepare(params);
+            return this.request(this.params.url + requestParams).then((amendement: AmendementsInterface): AmendementsInterface => {
+                this.amendement.next(amendement);
+                return amendement;
+            });
+        } else {
+            throw 'requestParams.numAmdt can\'t be null. number or array of numbers must be provided.';
+        }
     }
 
     /**
@@ -62,7 +67,7 @@ export class AmendementModule extends AbstractParseModule<AmendementsInterface>{
      * - Iteration on the interface keys with strict typing 
      * 
      */
-    prepare(requestParams: AmendementRequestParams): string {   
+    prepare(requestParams: AmendementRequestParams, ids?: Array<number>): string {
         let params: string = '?';
         params += 'legislature=' + requestParams.legislature;
         params += '&bibard=' + requestParams.bibard; 
