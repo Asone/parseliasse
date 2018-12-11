@@ -15,7 +15,7 @@ class DiscussionModule extends Abstract_1.AbstractParseModule {
         this.discussion = new rxjs_1.Subject();
         this.params = {
             cronjob: false,
-            url: 'http://eliasse.assemblee-nationale.fr/eliasse/amendement.do',
+            url: 'http://eliasse.assemblee-nationale.fr/eliasse/discussion.do',
             requestParams: {
                 bibard: 1396,
                 bibardSuffixe: null,
