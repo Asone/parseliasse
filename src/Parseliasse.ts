@@ -7,7 +7,7 @@ import { AmdtDerouleurModule, DiscussionModule, ProchainADiscuterModule, Amendem
 import { ParamsInterface, AmendementRequestParams, DiscussionRequestParams, AmdtDerouleurRequestParams } from './interfaces/Params.interface';
 
 
-interface ModulesParams{
+export interface ModulesParams{
     amendement?: ParamsInterface<AmendementRequestParams>;
     discussion?: ParamsInterface<DiscussionRequestParams>;
     amdtDerouleur?: ParamsInterface<AmdtDerouleurRequestParams>;  
@@ -26,6 +26,7 @@ export class Parseliasse{
     prochainADiscuter: ProchainADiscuterModule = new ProchainADiscuterModule();
     amendement: AmendementModule = new AmendementModule();
 
+    // default parameters
     params: ModulesParams = {
         amendement: {
             url: 'http://eliasse.assemblee-nationale.fr/eliasse/amendement.do',
@@ -46,10 +47,11 @@ export class Parseliasse{
     }
 
     constructor(params?: ModulesParams){
-
+        // overwrite default parameters
         if (params) Object.assign(this.params, params);
 
-        if (this.params.amendement) this.amendement = new AmendementModule(this.params.amdtDerouleur);
+        // overwrite default parameters if needed in submodules
+        if (this.params.amendement) this.amendement = new AmendementModule(this.params.amendement);
         if (this.params.amdtDerouleur) this.amdtDerouleur = new AmdtDerouleurModule(this.params.amdtDerouleur);
         if (this.params.discussion) this.discussion = new DiscussionModule(this.params.discussion);
         if (this.params.prochainADiscuter) this.prochainADiscuter = new ProchainADiscuterModule(this.params.prochainADiscuter);
