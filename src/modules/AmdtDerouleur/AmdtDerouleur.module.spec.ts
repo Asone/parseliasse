@@ -18,7 +18,7 @@ describe('[AmdtDerouleur] Test suite for AmdtDerouleur module',()=> {
 
     it('AmdtDerouleur should have initialized parameters', () => {
         expect(amdtDerouleurModule).not.null;
-        expect(amdtDerouleurModule.params.url).to.be.equal('http://eliasse.assemblee-nationale.fr/eliasse/AmdtDerouleur.do');
+        expect(amdtDerouleurModule.params.url).to.be.equal('http://eliasse.assemblee-nationale.fr/eliasse/amdtDerouleur.do');
     });
 
     it('AmdtDerouleur should be able to prepare request', () => {
