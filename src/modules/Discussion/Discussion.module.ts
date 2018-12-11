@@ -31,7 +31,7 @@ export class DiscussionModule extends AbstractParseModule<DiscussionInterface>{
     discussion: Subject<DiscussionInterface> = new Subject<DiscussionInterface>();
     params: InitParamsInterface<DiscussionRequestParams> = {
         cronjob: false,
-        url: 'http://eliasse.assemblee-nationale.fr/eliasse/amendement.do',
+        url: 'http://eliasse.assemblee-nationale.fr/eliasse/discussion.do',
         requestParams: {
             bibard: 1396,
             bibardSuffixe: null,

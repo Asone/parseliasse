@@ -17,7 +17,7 @@ describe('[Discussion] Test suite for Discussion module',()=> {
 
     it('DiscussionModule should have initialized parameters', () => {
         expect(discussionModule).not.null;
-        expect(discussionModule.params.url).to.be.equal('http://eliasse.assemblee-nationale.fr/eliasse/amendement.do');
+        expect(discussionModule.params.url).to.be.equal('http://eliasse.assemblee-nationale.fr/eliasse/discussion.do');
     });
 
     it('DiscussionModule should have a prepare method that generates a parameters string for request with default parameters', () => {
