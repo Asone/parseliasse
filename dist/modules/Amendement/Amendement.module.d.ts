@@ -15,7 +15,7 @@ export declare class AmendementModule extends AbstractParseModule<AmendementsInt
      *
      * @returns Promise<AmendementInterface>
      */
-    fetch: () => Promise<AmendementsInterface>;
+    fetch: (ids?: number | number[]) => Promise<AmendementsInterface>;
     /**
      * Returns the Amendement object as an Observable
      *
@@ -34,5 +34,5 @@ export declare class AmendementModule extends AbstractParseModule<AmendementsInt
  * - Iteration on the interface keys with strict typing
  *
  */
-    prepare(requestParams: AmendementRequestParams): string;
+    prepare(requestParams: AmendementRequestParams, ids?: Array<number>): string;
 }

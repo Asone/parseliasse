@@ -15,7 +15,7 @@ class AmdtDerouleurModule extends Abstract_1.AbstractParseModule {
         this.amdtDerouleur = new rxjs_1.Subject();
         this.params = {
             cronjob: false,
-            url: 'http://eliasse.assemblee-nationale.fr/eliasse/AmdtDerouleur.do',
+            url: 'http://eliasse.assemblee-nationale.fr/eliasse/amdtDerouleur.do',
             requestParams: {
                 bibard: 1396,
                 bibardSuffixe: null,

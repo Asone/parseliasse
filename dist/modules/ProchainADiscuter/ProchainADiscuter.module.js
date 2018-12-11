@@ -37,7 +37,7 @@ class ProchainADiscuterModule extends Abstract_1.AbstractParseModule {
         if (params)
             Object.assign(this.params, params);
         if (params && params.cronjob)
-            this.startjob(this.fetch, 60);
+            this.startjob(this.fetch, 10);
     }
     /**
      * Returns the ProchainADiscuter object as an Observable

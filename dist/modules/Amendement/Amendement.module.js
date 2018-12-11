@@ -26,17 +26,25 @@ class AmendementModule extends Abstract_1.AbstractParseModule {
          *
          * @returns Promise<AmendementInterface>
          */
-        this.fetch = () => {
-            const requestParams = this.prepare(this.params.requestParams);
-            return this.request(this.params.url + requestParams).then((amendement) => {
-                this.amendement.next(amendement);
-                return amendement;
-            });
+        this.fetch = (ids) => {
+            let params = this.params.requestParams;
+            if (ids)
+                params.numAmdt = ids;
+            if (this.params.requestParams.numAmdt) {
+                const requestParams = this.prepare(params);
+                return this.request(this.params.url + requestParams).then((amendement) => {
+                    this.amendement.next(amendement);
+                    return amendement;
+                });
+            }
+            else {
+                throw 'requestParams.numAmdt can\'t be null. number or array of numbers must be provided.';
+            }
         };
         if (params)
             Object.assign(this.params, params);
         if (params && params.cronjob)
-            this.startjob(this.fetch, 60);
+            this.startjob(this.fetch, 10);
     }
     /**
      * Returns the Amendement object as an Observable
@@ -58,7 +66,7 @@ class AmendementModule extends Abstract_1.AbstractParseModule {
  * - Iteration on the interface keys with strict typing
  *
  */
-    prepare(requestParams) {
+    prepare(requestParams, ids) {
         let params = '?';
         params += 'legislature=' + requestParams.legislature;
         params += '&bibard=' + requestParams.bibard;
