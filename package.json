@@ -1,6 +1,6 @@
 {
   "name": "parseliasse",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0-alpha.2",
   "description": "Projet de module typescript pour exploitation des données distribuées par le système Eliasse de l'assemblée nationale",
   "main": "dist/index.js",
   "types:": "dist/index.d.ts",
