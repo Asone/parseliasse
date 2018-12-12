@@ -22,7 +22,7 @@ export abstract class AbstractParseModule<T>{
       requestParams: {}
     }
 
-    cron:  NodeJS.Timeout | null = null;
+    cron: number | null = null;
     
     constructor(params?: ParamsInterface<any>){
         if (params && params.url) this.params.url = params.url;
@@ -50,14 +50,14 @@ export abstract class AbstractParseModule<T>{
      * @param time Delay beetween each iteration
      */
     startjob(fn: () => Promise<T>, time: number): void {   
-        this.cron = setInterval(fn,time*1000);
+        this.cron = window.setInterval(fn,time*1000);
     }
 
     /**
      * Stops The cronjob.
      */
     stopjob(): void {
-        if (this.cron) clearInterval(this.cron);
+        if (this.cron) window.clearInterval(this.cron);
     }
 
 }
