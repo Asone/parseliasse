@@ -1,14 +1,8 @@
-# WIP: ParsEliasse
+# ParsEliasse
 
 Parseliasse est un projet de création de module Typescript afin de faciliter la récupération et le traitement des données distribuées par le programme Eliasse. 
 
 Parseliasse est construit sous `nodeJS` en `Typescript`. 
-
-## Disclaimer
-
-Ce projet est encore en cours de construction et n'est pour le moment pas véritablement fonctionnel. 
-
-Une roadmap est détaillé en bas du présent document.
 
 ## Installation
 
@@ -26,7 +20,6 @@ Les dépendances utilisées à ce jour dans le module sont les suivants :
 
    - `RxJs` : Afin de permettre la diffusion des flux sous forme d'observables
    - `node-fetch` : afin d'effectuer des requêtes HTTP vers les flux d'origine.
-
 
 ## Utilisation
 
@@ -54,9 +47,63 @@ le module ParsEliasse n'est pour l'instant qu'un wrapper de sous-modules spécif
     const prochainADiscuter: ProchainADiscuterModule = new ProchainADiscuterModule();
 ```
 
-### Configuration
+### Configuration & paramètres par défaut
 
 Il est possible de configurer chaque module à l'initialisation que ce soit en instanciant chaque module séparemment ou en appelant le module global. 
+
+Le module global prend un objet de paramétrage qui est en fait une concaténation de l'ensemble des configurations pour chaque module : 
+
+```typescript
+    const maconfig = {
+        amendement: {
+            cron: false,
+            url: 'http://www.assemblee-nationale.fr'
+            requestParams : {
+                legislature: 15
+            }
+        },
+        amdtDerouleur: {
+            cron: true,
+            url: 'http://www.assemblee-nationale.fr',
+            ...
+        },
+        ...
+    }
+
+    const parseliasseInstance = new ParsEliasse(maconfig);
+
+```
+
+Les sous-modules peuvent également prendre un objet de paramétrage : 
+
+```typescript
+    const maconfig = {
+        cron: true
+    }
+
+    const amdtDerouleur = new AdmtDerouleurModule(maconfig);
+```
+
+
+#### cronjobs 
+
+les cronjobs ont les timings par défaut listés ci-dessous : 
+
+- Flux amendement : 10 secondes
+- Flux amdtDerouleur : 60 secondes
+- Flux Discussion : 60 secondes
+- Flux ProchainADiscuter : 10 secondes
+
+à noter que vous pouvez lancer un cronjob avec la fonction à éxécuter ainsi que le délai de votre choix manuellement.
+
+ e.g : 
+
+```
+const discussion: DiscussionModule = new DiscussionModule();
+
+// appelle la fonction `fetch` du module discussion toutes les 30 secondes
+discussion.startjob(discussion.fetch,30);
+```
 
 ### Typages
 
@@ -88,26 +135,14 @@ Vous pouvez suggérer des évolutions à travers le système de tickets où prop
 
 Si vous souhaitez soumettre des modifications/évolutions via une pull-request, veuillez noter les points suivants :
 
-- Toute fonctionnalité doit être accompagnée des tests unitaires correspondants afin de garantir une maintenabilité optimale
+- Toute fonctionnalité doit être accompagnée des tests unitaires correspondants afin de garantir une maintenabilité optimale.
 - Le code doit être fortement typé, tant sur les inputs que les outputs pour garantir la cohérence des structures de données.
-- Le code doit être documenté en respectant le format javadoc
+- Le code doit être documenté en respectant le format [javadoc](https://openclassrooms.com/fr/courses/1115306-presentation-de-la-javadoc)
 - Le code doit fait appel le moins possible à des dépendances tierces. 
 
 
 Le dépôt parseliasse est publié sur [Framagit](https://framagit.org/Asone/parseliasse) ainsi que sur [Github](https://github.com/Asone/parseliasse). 
 Il est néanmoins encouragé de soumettre les tickets et les PR via Framagit. 
-
-
-## Roadmap/Todo 
-
-- Done : Créer les interfaces pour garantir les modèles de données
-- Done : construire l'architecture générale du module.
-- Done : Créer des tests unitaires afin de valider l'ensemble des fonctionnalités du module
-- Done : créer une documentation adéquate ainsi que des exemples afin de faciliter la prise en main par des développeurs ultérieurs. 
-- Todo : Compléter l'ensemble de tests afin de couvrir l'ensemble du code. 
-- Todo : publier le module sur un registre npm afin d'en faciliter le déploiement
-- Todo : mise en place d'une CI de validation du code et des test.
-- Todo : Développer une ou des méthodes afin de faciliter la remontée de l'évolution des amendements au fil des arbitrages. 
 
 ## Licence
 
