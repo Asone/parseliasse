@@ -66,6 +66,6 @@
     "instrument": true
   },
   "files": [
-   "./dist/"
+   "dist"
   ]
 }
