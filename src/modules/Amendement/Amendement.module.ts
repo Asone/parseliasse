@@ -17,7 +17,7 @@ export class AmendementModule extends AbstractParseModule<AmendementsInterface>{
             bibardSuffixe: null,
             legislature: 15,
             organeAbrv: 'AN',
-            numAmdt: []
+            numAmdt: null
         }
     };
     
@@ -35,14 +35,14 @@ export class AmendementModule extends AbstractParseModule<AmendementsInterface>{
     fetch = (ids?: number | Array<number>): Promise<AmendementsInterface> => {
         let params: AmendementRequestParams = this.params.requestParams;
         if (ids) params.numAmdt = ids;
-        if (this.params.requestParams.numAmdt) {
+        if (!this.params.requestParams.numAmdt) {
+            throw 'requestParams.numAmdt can\'t be null. number or array of numbers must be provided.';
+        } else {
             const requestParams: string = this.prepare(params);
             return this.request(this.params.url + requestParams).then((amendement: AmendementsInterface): AmendementsInterface => {
                 this.amendement.next(amendement);
                 return amendement;
             });
-        } else {
-            throw 'requestParams.numAmdt can\'t be null. number or array of numbers must be provided.';
         }
     }
 
