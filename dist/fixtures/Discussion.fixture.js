@@ -802,3 +802,4 @@ exports.discussionFixture = {
         amendementsByNum: null
     }
 };
+//# sourceMappingURL=Discussion.fixture.js.map

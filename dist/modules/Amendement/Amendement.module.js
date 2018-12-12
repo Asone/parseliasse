@@ -89,3 +89,4 @@ class AmendementModule extends Abstract_1.AbstractParseModule {
     }
 }
 exports.AmendementModule = AmendementModule;
+//# sourceMappingURL=Amendement.module.js.map

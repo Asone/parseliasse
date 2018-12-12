@@ -15,3 +15,4 @@ exports.ProchainADiscuterFixture = {
         nbrAmdtRestant: "1"
     }
 };
+//# sourceMappingURL=ProchainADiscuter.fixture.js.map

@@ -39,3 +39,4 @@ var SortEnum;
     SortEnum["Retir\u00E9"] = "Retir\u00E9";
     SortEnum["Tomb\u00E9"] = "Tomb\u00E9";
 })(SortEnum = exports.SortEnum || (exports.SortEnum = {}));
+//# sourceMappingURL=Enums.interface.js.map

@@ -1,3 +1,7 @@
+/**
+ * @author Nelson Herbin <nelson@herbin.info>
+ * @copyright 2018. MIT Licence
+ */
 export { Parseliasse } from './Parseliasse';
 export { AmdtDerouleurModule } from './modules/AmdtDerouleur/AmdtDerouleur.module';
 export { AmendementModule } from './modules/Amendement/Amendement.module';

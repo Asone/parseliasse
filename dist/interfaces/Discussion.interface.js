@@ -7,3 +7,4 @@ var DiscussionAmdtPositonInterface;
     DiscussionAmdtPositonInterface["Fin"] = "fin";
     DiscussionAmdtPositonInterface["Milieu"] = "milieu";
 })(DiscussionAmdtPositonInterface = exports.DiscussionAmdtPositonInterface || (exports.DiscussionAmdtPositonInterface = {}));
+//# sourceMappingURL=Discussion.interface.js.map

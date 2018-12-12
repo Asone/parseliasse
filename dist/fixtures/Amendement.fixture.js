@@ -475,3 +475,4 @@ exports.AmendementsFixture = {
             }
         }]
 };
+//# sourceMappingURL=Amendement.fixture.js.map

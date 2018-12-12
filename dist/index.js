@@ -1,4 +1,8 @@
 "use strict";
+/**
+ * @author Nelson Herbin <nelson@herbin.info>
+ * @copyright 2018. MIT Licence
+ */
 Object.defineProperty(exports, "__esModule", { value: true });
 // main module
 var Parseliasse_1 = require("./Parseliasse");
@@ -14,3 +18,4 @@ var Discussion_module_1 = require("./modules/Discussion/Discussion.module");
 exports.DiscussionModule = Discussion_module_1.DiscussionModule;
 var ProchainADiscuter_module_1 = require("./modules/ProchainADiscuter/ProchainADiscuter.module");
 exports.ProchainADiscuterModule = ProchainADiscuter_module_1.ProchainADiscuterModule;
+//# sourceMappingURL=index.js.map

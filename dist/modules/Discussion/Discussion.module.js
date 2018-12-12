@@ -84,3 +84,4 @@ class DiscussionModule extends Abstract_1.AbstractParseModule {
     }
 }
 exports.DiscussionModule = DiscussionModule;
+//# sourceMappingURL=Discussion.module.js.map

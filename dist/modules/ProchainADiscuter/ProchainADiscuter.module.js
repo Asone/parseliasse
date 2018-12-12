@@ -49,3 +49,4 @@ class ProchainADiscuterModule extends Abstract_1.AbstractParseModule {
     }
 }
 exports.ProchainADiscuterModule = ProchainADiscuterModule;
+//# sourceMappingURL=ProchainADiscuter.module.js.map
