@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
-      "target": "es2017",
-      "lib" : ["es2017","es5", "es6", "dom","esnext.asynciterable"],
+      "target": "es5",
+      "lib" : ["es5", "es6", "dom","esnext.asynciterable"],
       "module": "commonjs",
       "declaration": true,
       "outDir": "./dist",
