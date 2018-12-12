@@ -21,9 +21,6 @@ describe('[AmdtDerouleur] Test suite for AmdtDerouleur module',()=> {
         expect(amdtDerouleurModule.params.url).to.be.equal('http://eliasse.assemblee-nationale.fr/eliasse/amdtDerouleur.do');
     });
 
-    it('AmdtDerouleur should be able to prepare request', () => {
-        
-    });
 
     it('AmdtDerouleur should be able to fetch data', () => {
         
