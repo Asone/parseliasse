@@ -4,12 +4,12 @@
  * @copyright 2018. MIT Licence
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-const modules_1 = require("./modules");
+var modules_1 = require("./modules");
 /**
  * Main module
  */
-class Parseliasse {
-    constructor(params) {
+var Parseliasse = /** @class */ (function () {
+    function Parseliasse(params) {
         // Submodules
         this.amdtDerouleur = new modules_1.AmdtDerouleurModule();
         this.discussion = new modules_1.DiscussionModule();
@@ -47,6 +47,7 @@ class Parseliasse {
         if (this.params.prochainADiscuter)
             this.prochainADiscuter = new modules_1.ProchainADiscuterModule(this.params.prochainADiscuter);
     }
-}
+    return Parseliasse;
+}());
 exports.Parseliasse = Parseliasse;
 //# sourceMappingURL=Parseliasse.js.map

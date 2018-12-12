@@ -5,7 +5,7 @@
  *
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-const fetch = require("node-fetch");
+var fetch = require("node-fetch");
 /**
  * This is an abstract class that provides with the mutual
  * methods that are used in the modules for ParsEliasse.
@@ -13,8 +13,8 @@ const fetch = require("node-fetch");
  * Derived Class will have to provide the data interface it will handle on requests.
  *
  */
-class AbstractParseModule {
-    constructor(params) {
+var AbstractParseModule = /** @class */ (function () {
+    function AbstractParseModule(params) {
         this.params = {
             cronjob: false,
             url: '',
@@ -30,13 +30,13 @@ class AbstractParseModule {
      *
      * @returns Promise<T> the request response
      */
-    request(url) {
+    AbstractParseModule.prototype.request = function (url) {
         return fetch(url, {
             method: 'get',
             headers: { 'Content-Type': 'application/json' },
         })
-            .then((res) => { return res.json(); });
-    }
+            .then(function (res) { return res.json(); });
+    };
     /**
      * Sets a cron for playing a job at regular interval.
      * Useful for updating regularly the data.
@@ -44,16 +44,17 @@ class AbstractParseModule {
      * @param fn The function to play on each iteration
      * @param time Delay beetween each iteration
      */
-    startjob(fn, time) {
-        this.cron = setInterval(fn, time * 1000);
-    }
+    AbstractParseModule.prototype.startjob = function (fn, time) {
+        this.cron = window.setInterval(fn, time * 1000);
+    };
     /**
      * Stops The cronjob.
      */
-    stopjob() {
+    AbstractParseModule.prototype.stopjob = function () {
         if (this.cron)
-            clearInterval(this.cron);
-    }
-}
+            window.clearInterval(this.cron);
+    };
+    return AbstractParseModule;
+}());
 exports.AbstractParseModule = AbstractParseModule;
 //# sourceMappingURL=Abstract.module.js.map
