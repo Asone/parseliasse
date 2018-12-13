@@ -3,6 +3,7 @@
  * @copyright 2018. MIT Licence
  *
  */
+/// <reference types="node" />
 import { ParamsInterface, InitParamsInterface } from '../../interfaces/Params.interface';
 /**
  * This is an abstract class that provides with the mutual
@@ -13,7 +14,7 @@ import { ParamsInterface, InitParamsInterface } from '../../interfaces/Params.in
  */
 export declare abstract class AbstractParseModule<T> {
     params: InitParamsInterface<any>;
-    cron: number | null;
+    cron: NodeJS.Timeout;
     constructor(params?: ParamsInterface<any>);
     /**
      *

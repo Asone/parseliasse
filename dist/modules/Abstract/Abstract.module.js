@@ -5,7 +5,7 @@
  *
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-var fetch = require("node-fetch");
+const fetch = require("node-fetch");
 /**
  * This is an abstract class that provides with the mutual
  * methods that are used in the modules for ParsEliasse.
@@ -13,8 +13,8 @@ var fetch = require("node-fetch");
  * Derived Class will have to provide the data interface it will handle on requests.
  *
  */
-var AbstractParseModule = /** @class */ (function () {
-    function AbstractParseModule(params) {
+class AbstractParseModule {
+    constructor(params) {
         this.params = {
             cronjob: false,
             url: '',
@@ -30,13 +30,13 @@ var AbstractParseModule = /** @class */ (function () {
      *
      * @returns Promise<T> the request response
      */
-    AbstractParseModule.prototype.request = function (url) {
+    request(url) {
         return fetch(url, {
             method: 'get',
             headers: { 'Content-Type': 'application/json' },
         })
-            .then(function (res) { return res.json(); });
-    };
+            .then((res) => { return res.json(); });
+    }
     /**
      * Sets a cron for playing a job at regular interval.
      * Useful for updating regularly the data.
@@ -44,17 +44,16 @@ var AbstractParseModule = /** @class */ (function () {
      * @param fn The function to play on each iteration
      * @param time Delay beetween each iteration
      */
-    AbstractParseModule.prototype.startjob = function (fn, time) {
-        this.cron = window.setInterval(fn, time * 1000);
-    };
+    startjob(fn, time) {
+        this.cron = setInterval(fn, time * 1000);
+    }
     /**
      * Stops The cronjob.
      */
-    AbstractParseModule.prototype.stopjob = function () {
+    stopjob() {
         if (this.cron)
-            window.clearInterval(this.cron);
-    };
-    return AbstractParseModule;
-}());
+            clearInterval(this.cron);
+    }
+}
 exports.AbstractParseModule = AbstractParseModule;
 //# sourceMappingURL=Abstract.module.js.map
