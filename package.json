@@ -29,6 +29,8 @@
   "author": "Nelson Herbin <nelson@herbin.info>",
   "license": "MIT",
   "dependencies": {
+    "@types/node": "^10.12.12",
+    "@types/node-fetch": "^2.1.4",
     "node-fetch": "^2.3.0",
     "rxjs": "^6.3.3",
     "typescript": "^3.0.1"
