@@ -10,6 +10,7 @@ const modules_1 = require("./modules");
  */
 class Parseliasse {
     constructor(params) {
+        // overwrite default parameters
         // Submodules
         this.amdtDerouleur = new modules_1.AmdtDerouleurModule();
         this.discussion = new modules_1.DiscussionModule();
@@ -17,6 +18,7 @@ class Parseliasse {
         this.amendement = new modules_1.AmendementModule();
         // default parameters
         this.params = {
+            autoconfig: false,
             amendement: {
                 url: 'http://eliasse.assemblee-nationale.fr/eliasse/amendement.do',
                 cronjob: false
@@ -34,7 +36,21 @@ class Parseliasse {
                 cronjob: false
             }
         };
-        // overwrite default parameters
+        if (this.params.autoconfig) { // launches autoconfiguration for submodules
+            this.prochainADiscuter.fetch().then((response) => {
+                // creates a new common set of parameters
+                const autoparams = {
+                    bibard: response.prochainADiscuter.bibard,
+                    bibardSuffixe: response.prochainADiscuter.bibardSuffixe,
+                    legislature: response.prochainADiscuter.legislature,
+                    organeAbrv: response.prochainADiscuter.organeAbrv
+                };
+                // overwrite request parameters with fetched parameters
+                Object.assign(this.params.amdtDerouleur.requestParams, autoparams);
+                Object.assign(this.params.amendement.requestParams, autoparams);
+                Object.assign(this.params.discussion, autoparams);
+            });
+        }
         if (params)
             Object.assign(this.params, params);
         // overwrite default parameters if needed in submodules
@@ -47,6 +63,7 @@ class Parseliasse {
         if (this.params.prochainADiscuter)
             this.prochainADiscuter = new modules_1.ProchainADiscuterModule(this.params.prochainADiscuter);
     }
+    autoconfig() { }
 }
 exports.Parseliasse = Parseliasse;
 //# sourceMappingURL=Parseliasse.js.map

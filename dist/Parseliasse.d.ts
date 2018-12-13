@@ -5,6 +5,7 @@
 import { AmdtDerouleurModule, DiscussionModule, ProchainADiscuterModule, AmendementModule } from './modules';
 import { ParamsInterface, AmendementRequestParams, DiscussionRequestParams, AmdtDerouleurRequestParams } from './interfaces/Params.interface';
 export interface ModulesParams {
+    autoconfig?: boolean;
     amendement?: ParamsInterface<AmendementRequestParams>;
     discussion?: ParamsInterface<DiscussionRequestParams>;
     amdtDerouleur?: ParamsInterface<AmdtDerouleurRequestParams>;
@@ -20,4 +21,5 @@ export declare class Parseliasse {
     amendement: AmendementModule;
     params: ModulesParams;
     constructor(params?: ModulesParams);
+    autoconfig(): void;
 }

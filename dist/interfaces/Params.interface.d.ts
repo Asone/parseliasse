@@ -8,32 +8,26 @@ export interface InitParamsInterface<T> {
     url: string;
     requestParams: T;
 }
-export interface AmdtDerouleurRequestParams {
+export interface CommonEliasseInterface {
     legislature?: number;
     organeAbrv?: string;
     bibard?: number;
     bibardSuffixe?: string | null;
+}
+export interface AmdtDerouleurRequestParams extends CommonEliasseInterface {
     startPosition?: number;
     endPosition?: number;
     start?: number;
     limit?: number;
     page?: number;
 }
-export interface AmendementRequestParams {
-    legislature?: number;
-    organeAbrv?: string;
-    bibard?: number;
-    bibardSuffixe?: string | null;
+export interface AmendementRequestParams extends CommonEliasseInterface {
     numAmdt?: number | Array<number>;
     start?: number;
     limit?: number;
     page?: number;
 }
-export interface DiscussionRequestParams {
-    legislature?: number;
-    organeAbrv?: string;
-    bibard?: number;
-    bibardSuffixe?: string | null;
+export interface DiscussionRequestParams extends CommonEliasseInterface {
     numAmdt?: number | Array<number>;
     start?: number;
     limit?: number;

@@ -4,10 +4,12 @@
  */
 
 import { AmdtDerouleurModule, DiscussionModule, ProchainADiscuterModule, AmendementModule } from './modules';
-import { ParamsInterface, AmendementRequestParams, DiscussionRequestParams, AmdtDerouleurRequestParams } from './interfaces/Params.interface';
+import { ParamsInterface, AmendementRequestParams, DiscussionRequestParams, AmdtDerouleurRequestParams, CommonEliasseInterface } from './interfaces/Params.interface';
+import { ProchainADiscuterInterface } from './interfaces/ProchainADiscuter.interface';
 
 
 export interface ModulesParams{
+    autoconfig?: boolean;
     amendement?: ParamsInterface<AmendementRequestParams>;
     discussion?: ParamsInterface<DiscussionRequestParams>;
     amdtDerouleur?: ParamsInterface<AmdtDerouleurRequestParams>;  
@@ -28,6 +30,7 @@ export class Parseliasse{
 
     // default parameters
     params: ModulesParams = {
+        autoconfig: false,
         amendement: {
             url: 'http://eliasse.assemblee-nationale.fr/eliasse/amendement.do',
             cronjob: false
@@ -48,12 +51,32 @@ export class Parseliasse{
 
     constructor(params?: ModulesParams){
         // overwrite default parameters
+        
+        if (this.params.autoconfig) { // launches autoconfiguration for submodules
+            this.prochainADiscuter.fetch().then((response: ProchainADiscuterInterface) => {
+                // creates a new common set of parameters
+                const autoparams: CommonEliasseInterface = {
+                    bibard: response.prochainADiscuter.bibard,
+                    bibardSuffixe: response.prochainADiscuter.bibardSuffixe,
+                    legislature: response.prochainADiscuter.legislature,
+                    organeAbrv: response.prochainADiscuter.organeAbrv
+                };
+                
+                // overwrite request parameters with fetched parameters
+                Object.assign(this.params.amdtDerouleur.requestParams, autoparams);
+                Object.assign(this.params.amendement.requestParams,autoparams);
+                Object.assign(this.params.discussion,autoparams);
+            });
+        }
+        
         if (params) Object.assign(this.params, params);
-
+        
         // overwrite default parameters if needed in submodules
         if (this.params.amendement) this.amendement = new AmendementModule(this.params.amendement);
         if (this.params.amdtDerouleur) this.amdtDerouleur = new AmdtDerouleurModule(this.params.amdtDerouleur);
         if (this.params.discussion) this.discussion = new DiscussionModule(this.params.discussion);
         if (this.params.prochainADiscuter) this.prochainADiscuter = new ProchainADiscuterModule(this.params.prochainADiscuter);
     }
+
+    autoconfig(){}
 }
