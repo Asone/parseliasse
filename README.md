@@ -47,6 +47,8 @@ le module ParsEliasse n'est pour l'instant qu'un wrapper de sous-modules spécif
     const prochainADiscuter: ProchainADiscuterModule = new ProchainADiscuterModule();
 ```
 
+**Il est important de noter que pour le module `AmendementModule` doit obligatoirement avoir le paramètre numAmdt comme étant non nul et doit contenir un nombre ou un tableau de nombre pour pouvoir effectuer des requêtes** 
+
 ### Configuration & paramètres par défaut
 
 Il est possible de configurer chaque module à l'initialisation que ce soit en instanciant chaque module séparemment ou en appelant le module global. 
@@ -84,7 +86,6 @@ Les sous-modules peuvent également prendre un objet de paramétrage :
     const amdtDerouleur = new AdmtDerouleurModule(maconfig);
 ```
 
-
 #### cronjobs 
 
 les cronjobs ont les timings par défaut listés ci-dessous : 
@@ -98,7 +99,7 @@ les cronjobs ont les timings par défaut listés ci-dessous :
 
  e.g : 
 
-```
+```typescript
 const discussion: DiscussionModule = new DiscussionModule();
 
 // appelle la fonction `fetch` du module discussion toutes les 30 secondes
