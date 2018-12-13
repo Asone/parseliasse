@@ -23,7 +23,7 @@ export abstract class AbstractParseModule<T>{
       requestParams: {}
     }
 
-    cron:  NodeJS.Timeout = null;
+    cron:  NodeJS.Timeout | null = null;
     
     constructor(params?: ParamsInterface<any>){
         if (params && params.url) this.params.url = params.url;
