@@ -6,10 +6,16 @@ import { expect } from 'chai';
 import * as nock from 'nock';
 import { AmendementInterface, AmendementsInterface } from '../../interfaces/Amendement.interface';
 describe('[Amendement] Test suite for Amendement module',()=> {
- 
+    
+    let amendementModule: AmendementModule;
+
+    beforeEach(() => {
+
+        amendementModule = new AmendementModule({requestParams:{numAmdt: [1,2,3]}});
+    });
+
     it('AmendementModule should be able to initialize', () => {
         
-        const amendementModule: AmendementModule = new AmendementModule();
         expect(amendementModule).to.instanceof(AmendementModule);
     });
 
@@ -21,7 +27,6 @@ describe('[Amendement] Test suite for Amendement module',()=> {
     });
 
     it('Amendement Module should be able to fetch data', () => {
-        const amendementModule: AmendementModule = new AmendementModule();
 
         const scope = nock(amendementModule.params.url)
         .get(amendementModule.prepare(amendementModule.params.requestParams))

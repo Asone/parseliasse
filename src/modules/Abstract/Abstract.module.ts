@@ -7,6 +7,7 @@
 
 const fetch = require("node-fetch");
 import { ParamsInterface, InitParamsInterface } from '../../interfaces/Params.interface';
+import { Response } from 'node-fetch';
 
 /**
  * This is an abstract class that provides with the mutual
@@ -22,7 +23,7 @@ export abstract class AbstractParseModule<T>{
       requestParams: {}
     }
 
-    cron: number | null = null;
+    cron:  NodeJS.Timeout = null;
     
     constructor(params?: ParamsInterface<any>){
         if (params && params.url) this.params.url = params.url;
@@ -50,14 +51,21 @@ export abstract class AbstractParseModule<T>{
      * @param time Delay beetween each iteration
      */
     startjob(fn: () => Promise<T>, time: number): void {   
-        this.cron = window.setInterval(fn,time*1000);
+        this.cron = setInterval(fn,time*1000);
     }
 
     /**
      * Stops The cronjob.
      */
     stopjob(): void {
-        if (this.cron) window.clearInterval(this.cron);
+        if (this.cron) clearInterval(this.cron);
+    }
+
+    applyParams(params: ParamsInterface<any>): void {
+        if(params.cronjob) this.params.cronjob = params.cronjob;
+        if(params.url) this.params.url = params.url;
+        if (params.requestParams) Object.assign(this.params.requestParams,params.requestParams);
+        
     }
 
 }

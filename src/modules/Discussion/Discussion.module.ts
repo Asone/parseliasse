@@ -43,7 +43,7 @@ export class DiscussionModule extends AbstractParseModule<DiscussionInterface>{
     
     constructor(params?: ParamsInterface<DiscussionRequestParams>){
         super();
-        if (params) Object.assign(this.params, params);
+        if (params) this.applyParams(params);
         if (params && params.cronjob) this.startjob(this.fetch,600);
     }
 

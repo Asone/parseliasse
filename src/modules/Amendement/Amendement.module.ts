@@ -23,7 +23,7 @@ export class AmendementModule extends AbstractParseModule<AmendementsInterface>{
     
     constructor(params?: ParamsInterface<AmendementRequestParams>){
         super();
-        if (params) Object.assign(this.params, params);
+        if (params) this.applyParams(params);
         if(params && params.cronjob) this.startjob(this.fetch,10);
     }
 
@@ -33,9 +33,9 @@ export class AmendementModule extends AbstractParseModule<AmendementsInterface>{
      * @returns Promise<AmendementInterface>
      */
     fetch = (ids?: number | Array<number>): Promise<AmendementsInterface> => {
-        let params: AmendementRequestParams = this.params.requestParams;
+        let params: AmendementRequestParams = Object.create(this.params.requestParams);
         if (ids) params.numAmdt = ids;
-        if (!this.params.requestParams.numAmdt) {
+        if (!params.numAmdt) {
             throw 'requestParams.numAmdt can\'t be null. number or array of numbers must be provided.';
         } else {
             const requestParams: string = this.prepare(params);

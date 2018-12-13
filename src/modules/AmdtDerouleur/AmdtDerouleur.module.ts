@@ -27,7 +27,7 @@ export class AmdtDerouleurModule extends AbstractParseModule<Array<AmdtDerouleur
 
     constructor(params?: ParamsInterface<AmdtDerouleurRequestParams>){
         super();
-        if (params) Object.assign(this.params, params);
+        if (params) this.applyParams(params);
         if (params && params.cronjob) this.startjob(this.fetch,60);
     }
 
