@@ -16,8 +16,7 @@ export class AmendementModule extends AbstractParseModule<AmendementsInterface>{
             bibard: 1396,
             bibardSuffixe: null,
             legislature: 15,
-            organeAbrv: 'AN',
-            numAmdt: null
+            organeAbrv: 'AN'
         }
     };
     
