@@ -14,7 +14,7 @@ import { ParamsInterface, InitParamsInterface } from '../../interfaces/Params.in
  */
 export declare abstract class AbstractParseModule<T> {
     params: InitParamsInterface<any>;
-    cron: NodeJS.Timeout;
+    cron: NodeJS.Timeout | null;
     constructor(params?: ParamsInterface<any>);
     /**
      *
@@ -35,4 +35,5 @@ export declare abstract class AbstractParseModule<T> {
      * Stops The cronjob.
      */
     stopjob(): void;
+    applyParams(params: ParamsInterface<any>): void;
 }

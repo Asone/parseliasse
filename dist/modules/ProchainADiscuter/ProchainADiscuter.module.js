@@ -35,7 +35,7 @@ class ProchainADiscuterModule extends Abstract_1.AbstractParseModule {
             });
         };
         if (params)
-            Object.assign(this.params, params);
+            this.applyParams(params);
         if (params && params.cronjob)
             this.startjob(this.fetch, 10);
     }

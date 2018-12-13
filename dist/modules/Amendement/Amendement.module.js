@@ -17,8 +17,7 @@ class AmendementModule extends Abstract_1.AbstractParseModule {
                 bibard: 1396,
                 bibardSuffixe: null,
                 legislature: 15,
-                organeAbrv: 'AN',
-                numAmdt: null
+                organeAbrv: 'AN'
             }
         };
         /**
@@ -27,10 +26,10 @@ class AmendementModule extends Abstract_1.AbstractParseModule {
          * @returns Promise<AmendementInterface>
          */
         this.fetch = (ids) => {
-            let params = this.params.requestParams;
+            let params = Object.create(this.params.requestParams);
             if (ids)
                 params.numAmdt = ids;
-            if (!this.params.requestParams.numAmdt) {
+            if (!params.numAmdt) {
                 throw 'requestParams.numAmdt can\'t be null. number or array of numbers must be provided.';
             }
             else {
@@ -42,7 +41,7 @@ class AmendementModule extends Abstract_1.AbstractParseModule {
             }
         };
         if (params)
-            Object.assign(this.params, params);
+            this.applyParams(params);
         if (params && params.cronjob)
             this.startjob(this.fetch, 10);
     }

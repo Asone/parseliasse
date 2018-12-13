@@ -54,6 +54,14 @@ class AbstractParseModule {
         if (this.cron)
             clearInterval(this.cron);
     }
+    applyParams(params) {
+        if (params.cronjob)
+            this.params.cronjob = params.cronjob;
+        if (params.url)
+            this.params.url = params.url;
+        if (params.requestParams)
+            Object.assign(this.params.requestParams, params.requestParams);
+    }
 }
 exports.AbstractParseModule = AbstractParseModule;
 //# sourceMappingURL=Abstract.module.js.map
