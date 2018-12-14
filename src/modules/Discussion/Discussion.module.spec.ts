@@ -23,6 +23,11 @@ describe('[Discussion] Test suite for Discussion module',()=> {
     it('DiscussionModule should have a prepare method that generates a parameters string for request with default parameters', () => {
         const params = discussionModule.prepare(discussionModule.params.requestParams);
         expect(params).not.null;
+        expect(params).to.match(/\&bibardSuffixe\=/);
+        expect(params).to.match(/legislature=[0-9]{1,3}/);
+        expect(params).to.match(/\&bibard\=[0-9]{1,9}/);
+        expect(params).to.match(/\&organeAbrv=[a-zA-Z]{1,5}/);
+        
     });
 
     it('DiscussionModule should have a prepare method that generates a parameters string for request with full set of parameters', () => {
@@ -115,12 +120,12 @@ describe('[Discussion] Test suite for Discussion module',()=> {
         expect(discussionModule.cron).not.null;
     });
 
-    // it('DiscussionModule should be able to start and stop a running job', () => {
-    //     discussionModule.startjob(discussionModule.fetch,60);
-    //     discussionModule.stopjob();
-
-    //     expect(discussionModule.cron).null;
-    // });
+    it('DiscussionModule should be able to start and stop a running job', () => {
+        discussionModule.startjob(discussionModule.fetch,60);
+        expect(discussionModule.cron).not.null;
+        discussionModule.stopjob();
+        expect(discussionModule.cron).null;
+    });
 
     it('DiscussionModule observe should return fetched data', () => {
         let observedData: DiscussionInterface;

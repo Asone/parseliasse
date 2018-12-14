@@ -48,4 +48,17 @@ describe('[ProchainADiscuter] Test suite for ProchainADiscuter module',()=> {
         )
     });
 
+    it('ProchainADiscuterModule should be able to start a running job', () => {
+        prochainADiscuterModule.startjob(prochainADiscuterModule.fetch, 60);
+        expect(prochainADiscuterModule.cron).not.null;
+    });
+
+    it('ProchainADiscuterModule should be able to start and stop a running job', () => {
+        prochainADiscuterModule.startjob(prochainADiscuterModule.fetch, 60);
+        expect(prochainADiscuterModule.cron).not.null;
+        prochainADiscuterModule.stopjob();
+        expect(prochainADiscuterModule.cron).null;
+    });
+
+
 });
