@@ -59,6 +59,8 @@ export abstract class AbstractParseModule<T>{
      */
     stopjob(): void {
         if (this.cron) clearInterval(this.cron);
+        // removes the `NodeJS.Timeout` object
+        this.cron = null;
     }
 
     applyParams(params: ParamsInterface<any>): void {
