@@ -35,7 +35,7 @@ export class AmendementModule extends AbstractParseModule<AmendementsInterface>{
         let params: AmendementRequestParams = Object.create(this.params.requestParams);
         if (ids) params.numAmdt = ids;
         if (!params.numAmdt) {
-            throw 'requestParams.numAmdt can\'t be null. number or array of numbers must be provided.';
+            throw new Error('requestParams.numAmdt can\'t be null. number or array of numbers must be provided.');
         } else {
             const requestParams: string = this.prepare(params);
             return this.request(this.params.url + requestParams).then((amendement: AmendementsInterface): AmendementsInterface => {

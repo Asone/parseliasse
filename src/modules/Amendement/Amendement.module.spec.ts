@@ -104,7 +104,18 @@ describe('[AmendementModule] Test suite for Amendement module',()=> {
         it('AmendementModule should be able to initialize with fully overwritten parameters', () => {
     
         });
+
+        it('AmendementModule should throw an exception if no numAmdt is provided', () => {
     
+            const scope = nock(amendementModule.params.url)
+            .get(amendementModule.prepare(amendementModule.params.requestParams))
+            .reply(200,AmendementsFixture);
+            amendementModule.params.requestParams.numAmdt = undefined;
+
+            expect(() => { amendementModule.fetch() }).to.throw('requestParams.numAmdt can\'t be null. number or array of numbers must be provided.');
+            
+        });
+
         it('AmendementModule should be able to fetch data', () => {
     
             const scope = nock(amendementModule.params.url)
