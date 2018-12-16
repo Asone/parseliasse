@@ -54,7 +54,7 @@ export class AmendementModule extends AbstractParseModule<AmendementsInterface>{
         return this.amendement.asObservable();
     }
 
-        /**
+    /**
      * @param requestParams The `GET` arguments to pass in URL request
      * 
      * @returns The serialized argument for the request

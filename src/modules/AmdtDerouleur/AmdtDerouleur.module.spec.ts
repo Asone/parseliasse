@@ -21,6 +21,10 @@ describe('[AmdtDerouleur] Test suite for AmdtDerouleur module',()=> {
         expect(amdtDerouleurModule.params.url).to.be.equal('http://eliasse.assemblee-nationale.fr/eliasse/amdtDerouleur.do');
     });
 
+    afterEach(() => {
+        nock.cleanAll()
+    });
+    
     it('AmdtDerouleur should be able to initialize with partially overwritten parameters', () => {
         const params: ParamsInterface<AmdtDerouleurRequestParams>= {
             cronjob: false,
@@ -123,11 +127,10 @@ describe('[AmdtDerouleur] Test suite for AmdtDerouleur module',()=> {
     
     
         amdtDerouleurModule.observe().subscribe(
-            (data: Array<AmdtDerouleurInterface>) => observedData = data,
-            error => console.error(error),
-            () => {
-                expect(observedData).to.equal(amdtDerouleurFixture);
-            }  
+            (data: Array<AmdtDerouleurInterface>) => {
+                expect(data.length).equal(amdtDerouleurFixture.length);
+            }  ,
+            error => console.error(error)
         );
 
         amdtDerouleurModule.fetch();
