@@ -24,6 +24,7 @@ export declare class ProchainADiscuterModule extends AbstractParseModule<Prochai
      * @returns Promise<ProchainADiscuterInterface>
      */
     fetch: () => Promise<ProchainADiscuterInterface>;
+    updateObject(prochainADiscuter: ProchainADiscuterInterface): ProchainADiscuterInterface;
     /**
      * Returns the ProchainADiscuter object as an Observable
      *

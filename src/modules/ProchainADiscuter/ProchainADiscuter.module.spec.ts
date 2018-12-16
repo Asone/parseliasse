@@ -22,6 +22,10 @@ describe('[ProchainADiscuter] Test suite for ProchainADiscuter module',()=> {
         expect(prochainADiscuterModule.params.url).to.be.equal('http://eliasse.assemblee-nationale.fr/eliasse/prochainADiscuter.do');
     });
 
+    afterEach(() => {
+        nock.cleanAll()
+    });
+    
     it('ProchainADiscuterModule should be able to fetch data', () => {
         const scope = nock(prochainADiscuterModule.params.url)
         .get('')

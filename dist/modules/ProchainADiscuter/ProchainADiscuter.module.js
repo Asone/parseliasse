@@ -29,15 +29,16 @@ class ProchainADiscuterModule extends Abstract_1.AbstractParseModule {
          * @returns Promise<ProchainADiscuterInterface>
          */
         this.fetch = () => {
-            return this.request(this.params.url).then((prochainADiscuter) => {
-                this.prochainADiscuter.next(prochainADiscuter);
-                return prochainADiscuter;
-            });
+            return this.request(this.params.url).then(this.updateObject.bind(this));
         };
         if (params)
             this.applyParams(params);
         if (params && params.cronjob)
             this.startjob(this.fetch, 10);
+    }
+    updateObject(prochainADiscuter) {
+        this.prochainADiscuter.next(prochainADiscuter);
+        return prochainADiscuter;
     }
     /**
      * Returns the ProchainADiscuter object as an Observable

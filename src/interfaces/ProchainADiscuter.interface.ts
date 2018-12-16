@@ -1,9 +1,9 @@
 export interface ProchainADiscuterInterface {
     prochainADiscuter: {
-        bibard:         string;
+        bibard:         number;
         bibardSuffixe:  string;
         numAmdt:        string;
-        legislature:    string;
+        legislature:    number;
         organeAbrv:     string;
         nbrAmdtRestant: string;
     }

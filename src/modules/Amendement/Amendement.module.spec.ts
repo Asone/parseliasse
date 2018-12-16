@@ -6,6 +6,7 @@ import { expect } from 'chai';
 import * as nock from 'nock';
 import { AmendementInterface, AmendementsInterface } from '../../interfaces/Amendement.interface';
 import { isAbsolute } from 'path';
+import { ParamsInterface, AmendementRequestParams } from '../../../dist/interfaces/Params.interface';
 describe('[AmendementModule] Test suite for Amendement module',()=> {
     
     let amendementModule: AmendementModule;
@@ -15,6 +16,10 @@ describe('[AmendementModule] Test suite for Amendement module',()=> {
             amendementModule = new AmendementModule({requestParams:{numAmdt: [1,2,3]}});
         });
     
+        afterEach(() => {
+            nock.cleanAll()
+        });
+        
         it('AmendementModule should be able to initialize', () => {
             
             expect(amendementModule).to.instanceof(AmendementModule);
@@ -28,7 +33,12 @@ describe('[AmendementModule] Test suite for Amendement module',()=> {
         });
     
         it('AmendementModule should be able to initialize with partially overwritten parameters', () => {
-    
+            const params: ParamsInterface<AmendementRequestParams> = {
+                url: 'http://www.pwet.info'
+            };
+
+            amendementModule = new AmendementModule(params);
+            expect(amendementModule.params.url).to.equal('http://www.pwet.info');
         });
     
         it('AmendementModule should be able to initialize with fully overwritten parameters', () => {
@@ -128,19 +138,22 @@ describe('[AmendementModule] Test suite for Amendement module',()=> {
             });
         });
     
-        it('AmdtDerouleur observe should return fetched data', () => {
+        it('AmdtDerouleur observe should return fetched data', (done) => {
             let observedData: AmendementsInterface;
             
             const scope = nock(amendementModule.params.url)
             .get(amendementModule.prepare(amendementModule.params.requestParams))
-            .reply(200,amendementModule);
+            .reply(200,AmendementsFixture);
         
         
             amendementModule.observe().subscribe(
-                (data: AmendementsInterface) => observedData = data,
+                (data: AmendementsInterface) => {
+                    expect(data.amendements.length).equal(AmendementsFixture.amendements.length);
+                    done();
+                },
                 error => console.error(error),
                 () => {
-                    expect(observedData).to.equal(amendementModule);
+            
                 }  
             );
     
@@ -154,6 +167,7 @@ describe('[AmendementModule] Test suite for Amendement module',()=> {
     
         it('AmendementModule should be able to start and stop a running job', () => {
             amendementModule.startjob(amendementModule.fetch, 60);
+            expect(amendementModule).not.null;
             amendementModule.stopjob();
             expect(amendementModule.cron).null
         });

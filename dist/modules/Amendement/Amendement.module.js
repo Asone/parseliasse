@@ -30,7 +30,7 @@ class AmendementModule extends Abstract_1.AbstractParseModule {
             if (ids)
                 params.numAmdt = ids;
             if (!params.numAmdt) {
-                throw 'requestParams.numAmdt can\'t be null. number or array of numbers must be provided.';
+                throw new Error('requestParams.numAmdt can\'t be null. number or array of numbers must be provided.');
             }
             else {
                 const requestParams = this.prepare(params);
@@ -54,17 +54,17 @@ class AmendementModule extends Abstract_1.AbstractParseModule {
         return this.amendement.asObservable();
     }
     /**
- * @param requestParams The `GET` arguments to pass in URL request
- *
- * @returns The serialized argument for the request
- *
- * @todo : This method should be rewritten to implement automation of the string building process.
- * Additional notes :
- * - `AmdtDerouleurRequestParams` has no index signature which makes it impossible to keycast with `myvar[key]`.
- * - If added `[key:string]: any` in interface, object will accept any additional field, which we don't want.
- * - Iteration on the interface keys with strict typing
- *
- */
+     * @param requestParams The `GET` arguments to pass in URL request
+     *
+     * @returns The serialized argument for the request
+     *
+     * @todo : This method should be rewritten to implement automation of the string building process.
+     * Additional notes :
+     * - `AmdtDerouleurRequestParams` has no index signature which makes it impossible to keycast with `myvar[key]`.
+     * - If added `[key:string]: any` in interface, object will accept any additional field, which we don't want.
+     * - Iteration on the interface keys with strict typing
+     *
+     */
     prepare(requestParams, ids) {
         let params = '?';
         params += 'legislature=' + requestParams.legislature;

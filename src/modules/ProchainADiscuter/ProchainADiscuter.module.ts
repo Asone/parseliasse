@@ -37,12 +37,14 @@ export class ProchainADiscuterModule extends AbstractParseModule<ProchainADiscut
      * 
      * @returns Promise<ProchainADiscuterInterface>
      */
-    fetch = (): Promise<ProchainADiscuterInterface>  => {
-        return this.request(this.params.url).then((prochainADiscuter: ProchainADiscuterInterface) => {
+    fetch = (): Promise<ProchainADiscuterInterface> => {
+        return this.request(this.params.url).then(this.updateObject.bind(this));
+    }
+
+    updateObject(prochainADiscuter: ProchainADiscuterInterface){
             this.prochainADiscuter.next(prochainADiscuter);
             return prochainADiscuter;
-        });
-    }
+        }
 
     /**
      * Returns the ProchainADiscuter object as an Observable

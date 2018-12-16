@@ -44,6 +44,7 @@ export class AmdtDerouleurModule extends AbstractParseModule<Array<AmdtDerouleur
         });
     }
 
+    
     /**
      * Returns the AmdDerouleur object as an Observable
      * 
