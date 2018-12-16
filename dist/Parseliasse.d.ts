@@ -21,5 +21,8 @@ export declare class Parseliasse {
     amendement: AmendementModule;
     params: ModulesParams;
     constructor(params?: ModulesParams);
-    autoconfig(): void;
+    boot(params: ModulesParams): void;
+    applyParams(obj: ParamsInterface<any>, config: ParamsInterface<any>): ParamsInterface<any>;
+    autoconfig(): Promise<boolean>;
+    autoApply(response: any): any;
 }
