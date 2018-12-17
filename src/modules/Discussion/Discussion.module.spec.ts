@@ -83,7 +83,7 @@ describe('[Discussion] Test suite for Discussion module',()=> {
         });
     });
 
-    it('DiscussionModule should be able to fetch data with numAmdt as array of numbers in parameters', () => {
+    it('DiscussionModule should be able to fetch data with numAmdt as array of numbers in parameters', (done) => {
         discussionModule.params.requestParams.numAmdt = [1,2,4];
         
         const scope = nock(discussionModule.params.url)
@@ -93,11 +93,12 @@ describe('[Discussion] Test suite for Discussion module',()=> {
         discussionModule.fetch().then((response: DiscussionInterface) => {
             expect(response).not.null;
             expect(response.amdtsParOrdreDeDiscussion.divisions.length).greaterThan(1);
+            done();
         });
     });
 
 
-    it('DiscussionModule should be able to fetch data with a full set parameters', () => {
+    it('DiscussionModule should be able to fetch data with a full set parameters', (done) => {
         discussionModule.params.requestParams.numAmdt = 42;
         discussionModule.params.requestParams.page = 1;
         discussionModule.params.requestParams.start = 0;
@@ -110,6 +111,7 @@ describe('[Discussion] Test suite for Discussion module',()=> {
         discussionModule.fetch().then((response: DiscussionInterface) => {
             expect(response).not.null;
             expect(response.amdtsParOrdreDeDiscussion.divisions.length).greaterThan(1);
+            done();
         });
     });
 

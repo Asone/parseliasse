@@ -34,16 +34,24 @@ class AmendementModule extends Abstract_1.AbstractParseModule {
             }
             else {
                 const requestParams = this.prepare(params);
-                return this.request(this.params.url + requestParams).then((amendement) => {
-                    this.amendement.next(amendement);
-                    return amendement;
-                });
+                return this.request(this.params.url + requestParams).then(this.update.bind(this));
             }
         };
         if (params)
             this.applyParams(params);
         if (params && params.cronjob)
             this.startjob(this.fetch, 10);
+    }
+    /**
+     * Updates the main object of sub-modules
+     *
+     * @param discussion The `AmendementsInterface` object retrieved from request
+     *
+     * @returns `AmendementsInterface` The discussion retrieved from request
+     */
+    update(amendement) {
+        this.amendement.next(amendement);
+        return amendement;
     }
     /**
      * Returns the Amendement object as an Observable
@@ -60,7 +68,7 @@ class AmendementModule extends Abstract_1.AbstractParseModule {
      *
      * @todo : This method should be rewritten to implement automation of the string building process.
      * Additional notes :
-     * - `AmdtDerouleurRequestParams` has no index signature which makes it impossible to keycast with `myvar[key]`.
+     * - `AmendementRequestParams` has no index signature which makes it impossible to keycast with `myvar[key]`.
      * - If added `[key:string]: any` in interface, object will accept any additional field, which we don't want.
      * - Iteration on the interface keys with strict typing
      *
@@ -72,13 +80,13 @@ class AmendementModule extends Abstract_1.AbstractParseModule {
         params += '&bibardSuffixe=' + (requestParams.bibardSuffixe ? requestParams.bibardSuffixe : '');
         params += '&organeAbrv=' + requestParams.organeAbrv;
         if (requestParams.numAmdt) {
-            if (typeof requestParams.numAmdt === 'object') {
+            if (typeof requestParams.numAmdt === 'number') {
+                params += '&numAmdt=' + requestParams.numAmdt;
+            }
+            else {
                 requestParams.numAmdt.forEach((numAmdt) => {
                     params += '&numAmdt=' + numAmdt;
                 });
-            }
-            else if (typeof requestParams.numAmdt === 'number') {
-                params += '&numAmdt=' + requestParams.numAmdt;
             }
         }
         params += requestParams.limit ? '&limit=' + requestParams.limit : '';

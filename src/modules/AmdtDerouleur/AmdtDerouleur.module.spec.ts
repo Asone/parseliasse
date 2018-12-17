@@ -3,6 +3,7 @@ import { expect } from 'chai';
 import * as nock from 'nock';
 import { AmdtDerouleurInterface, ParamsInterface, AmdtDerouleurRequestParams } from '../../interfaces';
 import { amdtDerouleurFixture } from '../../fixtures/AmdtDerouleur.fixture';
+import { doesNotReject } from 'assert';
 
 describe('[AmdtDerouleur] Test suite for AmdtDerouleur module',()=> {
     
@@ -24,7 +25,7 @@ describe('[AmdtDerouleur] Test suite for AmdtDerouleur module',()=> {
     afterEach(() => {
         nock.cleanAll()
     });
-    
+
     it('AmdtDerouleur should be able to initialize with partially overwritten parameters', () => {
         const params: ParamsInterface<AmdtDerouleurRequestParams>= {
             cronjob: false,
@@ -91,7 +92,7 @@ describe('[AmdtDerouleur] Test suite for AmdtDerouleur module',()=> {
         expect(params).to.match(/\&organeAbrv=[a-zA-Z]{1,5}/);
     });
 
-    it('AmdtDerouleur should be able to fetch data', () => {
+    it('AmdtDerouleur should be able to fetch data', (done) => {
         
         const scope = nock(amdtDerouleurModule.params.url)
         .get(amdtDerouleurModule.prepare(amdtDerouleurModule.params.requestParams))
@@ -103,6 +104,7 @@ describe('[AmdtDerouleur] Test suite for AmdtDerouleur module',()=> {
             expect(response[0].numero).to.equal('1029');
             expect(response[0].auteurGroupe).to.equal("NI");
             expect(response[1].auteurLabel).to.equal("M. CIOTTI");
+            done();
         });
     });
 
@@ -118,7 +120,7 @@ describe('[AmdtDerouleur] Test suite for AmdtDerouleur module',()=> {
         expect(amdtDerouleurModule.cron).null;
     });
 
-    it('AmdtDerouleur observe should return fetched data', () => {
+    it('AmdtDerouleur observe should return fetched data', (done) => {
         let observedData: Array<AmdtDerouleurInterface>;
         
         const scope = nock(amdtDerouleurModule.params.url)
@@ -129,6 +131,7 @@ describe('[AmdtDerouleur] Test suite for AmdtDerouleur module',()=> {
         amdtDerouleurModule.observe().subscribe(
             (data: Array<AmdtDerouleurInterface>) => {
                 expect(data.length).equal(amdtDerouleurFixture.length);
+                done();
             }  ,
             error => console.error(error)
         );

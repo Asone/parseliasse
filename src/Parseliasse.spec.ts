@@ -5,15 +5,25 @@ import { AmdtDerouleurModule, AmendementModule, DiscussionModule, ProchainADiscu
 import {  } from './modules/Amendement/Amendement.module';
 import { beforeEach } from 'mocha';
 import { ProchainADiscuterInterface } from '../dist/interfaces/ProchainADiscuter.interface';
+import { AmendementsFixture } from './fixtures/Amendement.fixture';
 import nock = require('nock');
+import { AmendementsInterface } from './interfaces';
+import { amdtDerouleurFixture } from './fixtures/AmdtDerouleur.fixture';
+import { AmdtDerouleurInterface } from '../dist/interfaces/AmdtDerouleur.interface';
+import { discussionFixture } from './fixtures/Discussion.fixture';
+import { DiscussionInterface } from '../dist/interfaces/Discussion.interface';
 
 describe('[ParsEliasse] Test suite for main ParsEliasse Module', () => {
     
-    
     describe('[ParsEliasse] Test suite with default parameters', () => {
         let parseliasse: Parseliasse;
+
         beforeEach(() => {
             parseliasse = new Parseliasse();
+        });
+
+        afterEach(() => {
+            nock.cleanAll()
         });
 
         it('ParsEliasse module should be able to initialize with correct parameters', () => {
@@ -27,12 +37,98 @@ describe('[ParsEliasse] Test suite for main ParsEliasse Module', () => {
             expect(parseliasse.prochainADiscuter).is.instanceOf(ProchainADiscuterModule);
             expect(parseliasse.discussion).is.instanceOf(DiscussionModule);
         });
+
+        it('AmendementModule as a submodule should be able to have an accessible fetch method', (done) => {
+            
+            var scope = nock('http://eliasse.assemblee-nationale.fr/eliasse/amendement.do')
+            .get(parseliasse.amendement.prepare(parseliasse.amendement.params.requestParams) + '&numAmdt=100')
+            .reply(200,AmendementsFixture);
+            
+            parseliasse.amendement.fetch(100).then((response: AmendementsInterface) => {
+                expect(response.amendements.length).to.greaterThan(2);
+                expect(response.amendements[0].etat).to.equal('DI');
+                done();
+            });
+        });
+
+        it('AmendementModule as a submodule should be able to have an accessible observe method', (done) => {
+            var scope = nock('http://eliasse.assemblee-nationale.fr/eliasse/amendement.do')
+            .get(parseliasse.amendement.prepare(parseliasse.amendement.params.requestParams) + '&numAmdt=100')
+            .reply(200,AmendementsFixture);
+            
+            parseliasse.amendement.observe().subscribe((response: AmendementsInterface) => {
+                expect(response.amendements.length).to.greaterThan(2);
+                expect(response.amendements[0].etat).to.equal('DI');
+                done();
+            });
+
+            parseliasse.amendement.fetch(100);
+        });
+        
+        it('AmdtDerouleurModule as a submodule should be able to have an accessible fetch method', (done) => {
+            
+            var scope = nock('http://eliasse.assemblee-nationale.fr/eliasse/amdtDerouleur.do')
+            .get(parseliasse.amdtDerouleur.prepare(parseliasse.amendement.params.requestParams))
+            .reply(200,amdtDerouleurFixture);
+            
+            parseliasse.amdtDerouleur.fetch().then((response: Array<AmdtDerouleurInterface>) => {
+                expect(response.length).to.greaterThan(2);
+                expect(response[0].numero).to.equal("1029");
+                done();
+            });
+        });
+
+        it('AmdtDerouleurModule as a submodule should be able to have an accessible observe method', (done) => {
+            var scope = nock('http://eliasse.assemblee-nationale.fr/eliasse/amdtDerouleur.do')
+            .get(parseliasse.amdtDerouleur.prepare(parseliasse.amdtDerouleur.params.requestParams))
+            .reply(200,amdtDerouleurFixture);
+            
+            parseliasse.amdtDerouleur.observe().subscribe((response: Array<AmdtDerouleurInterface>) => {
+                expect(response.length).to.greaterThan(2);
+                expect(response[0].numero).to.equal("1029");
+                done();
+            });
+
+            parseliasse.amdtDerouleur.fetch();
+        });
+
+        it('DiscussionModule as a submodule should be able to have an accessible fetch method', (done) => {
+            
+            var scope = nock('http://eliasse.assemblee-nationale.fr/eliasse/discussion.do')
+            .get(parseliasse.amdtDerouleur.prepare(parseliasse.amendement.params.requestParams))
+            .reply(200,discussionFixture);
+            
+            parseliasse.discussion.fetch().then((response: DiscussionInterface) => {
+                expect(response.amdtsParOrdreDeDiscussion.bibard).to.equal('1396');
+                expect(response.amdtsParOrdreDeDiscussion.amendements.length).to.greaterThan(2);
+                expect(response.amdtsParOrdreDeDiscussion.divisions.length).to.greaterThan(2);
+              
+                done();
+            });
+        });
+    
+        it('DiscussionModule as a submodule should be able to have an accessible observe method', (done) => {
+            var scope = nock('http://eliasse.assemblee-nationale.fr/eliasse/discussion.do')
+            .get(parseliasse.discussion.prepare(parseliasse.discussion.params.requestParams))
+            .reply(200,discussionFixture);
+            
+            parseliasse.discussion.observe().subscribe((response: DiscussionInterface) => {
+                expect(response.amdtsParOrdreDeDiscussion.bibard).to.equal('1396');
+                expect(response.amdtsParOrdreDeDiscussion.amendements.length).to.greaterThan(2);
+                expect(response.amdtsParOrdreDeDiscussion.divisions.length).to.greaterThan(2);
+                done();
+            });
+    
+            parseliasse.discussion.fetch();
+        });
+
     });
+
+   
 
     describe('[ParsEliasse] Test suite with overwritten parameters', () => {
         let parseliasse: Parseliasse;
  
-
         beforeEach(() => {
 
             const params : ModulesParams = {

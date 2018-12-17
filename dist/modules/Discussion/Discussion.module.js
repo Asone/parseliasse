@@ -31,15 +31,23 @@ class DiscussionModule extends Abstract_1.AbstractParseModule {
          */
         this.fetch = () => {
             const requestParams = this.prepare(this.params.requestParams);
-            return this.request(this.params.url + requestParams).then((discussion) => {
-                this.discussion.next(discussion);
-                return discussion;
-            });
+            return this.request(this.params.url + requestParams).then(this.update.bind(this));
         };
         if (params)
             this.applyParams(params);
         if (params && params.cronjob)
             this.startjob(this.fetch, 600);
+    }
+    /**
+     * Updates the main object of sub-module
+     *
+     * @param discussion The `DiscussionInterface` object retrieved from request
+     *
+     * @returns `DiscussionInterface` The discussion retrieved from request
+     */
+    update(discussion) {
+        this.discussion.next(discussion);
+        return discussion;
     }
     /**
      * Returns the `Discussion` object as an `Observable`
@@ -56,7 +64,7 @@ class DiscussionModule extends Abstract_1.AbstractParseModule {
      *
      * @todo : This method should be rewritten to implement automation of the string building process.
      * Additional notes :
-     * - `AmdtDerouleurRequestParams` has no index signature which makes it impossible to keycast with `myvar[key]`.
+     * - `DiscussionRequestParams` has no index signature which makes it impossible to keycast with `myvar[key]`.
      * - If added `[key:string]: any` in interface, object will accept any additional field, which we don't want.
      * - Iteration on the interface keys with strict typing
      *

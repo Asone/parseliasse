@@ -17,6 +17,14 @@ export declare class AmendementModule extends AbstractParseModule<AmendementsInt
      */
     fetch: (ids?: number | number[]) => Promise<AmendementsInterface>;
     /**
+     * Updates the main object of sub-modules
+     *
+     * @param discussion The `AmendementsInterface` object retrieved from request
+     *
+     * @returns `AmendementsInterface` The discussion retrieved from request
+     */
+    update(amendement: AmendementsInterface): AmendementsInterface;
+    /**
      * Returns the Amendement object as an Observable
      *
      * @returns Observable<Array<AmendementInterface>>
@@ -29,7 +37,7 @@ export declare class AmendementModule extends AbstractParseModule<AmendementsInt
      *
      * @todo : This method should be rewritten to implement automation of the string building process.
      * Additional notes :
-     * - `AmdtDerouleurRequestParams` has no index signature which makes it impossible to keycast with `myvar[key]`.
+     * - `AmendementRequestParams` has no index signature which makes it impossible to keycast with `myvar[key]`.
      * - If added `[key:string]: any` in interface, object will accept any additional field, which we don't want.
      * - Iteration on the interface keys with strict typing
      *

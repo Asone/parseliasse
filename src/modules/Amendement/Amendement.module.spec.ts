@@ -44,7 +44,16 @@ describe('[AmendementModule] Test suite for Amendement module',()=> {
         it('AmendementModule should be able to initialize with fully overwritten parameters', () => {
     
         });
-    
+
+        it('AmendementModule should have a prepare method that generates a parameters string for request with default parameters', () => {
+            const params = amendementModule.prepare(amendementModule.params.requestParams);
+            expect(params).not.null;
+            expect(params).to.match(/\&bibardSuffixe\=/);
+            expect(params).to.match(/legislature=[0-9]{1,3}/);
+            expect(params).to.match(/\&bibard\=[0-9]{1,9}/);
+            expect(params).to.match(/\&organeAbrv=[a-zA-Z]{1,5}/);
+        });
+
         it('AmendementModule should be able to fetch data', () => {
     
             const scope = nock(amendementModule.params.url)
@@ -94,7 +103,11 @@ describe('[AmendementModule] Test suite for Amendement module',()=> {
 
             amendementModule = new AmendementModule({requestParams:{numAmdt: 42}});
         });
-    
+
+        afterEach(() => {
+            nock.cleanAll()
+        });
+
         it('AmendementModule should be able to initialize', () => {
             
             expect(amendementModule).to.instanceof(AmendementModule);
@@ -126,7 +139,7 @@ describe('[AmendementModule] Test suite for Amendement module',()=> {
             
         });
 
-        it('AmendementModule should be able to fetch data', () => {
+        it('AmendementModule should be able to fetch data', (done) => {
     
             const scope = nock(amendementModule.params.url)
             .get(amendementModule.prepare(amendementModule.params.requestParams))
@@ -135,6 +148,7 @@ describe('[AmendementModule] Test suite for Amendement module',()=> {
             amendementModule.fetch().then((response: AmendementsInterface) => {
                 expect(response).not.null;
                 expect(response.amendements.length).greaterThan(1);
+                done();
             });
         });
     
@@ -151,10 +165,7 @@ describe('[AmendementModule] Test suite for Amendement module',()=> {
                     expect(data.amendements.length).equal(AmendementsFixture.amendements.length);
                     done();
                 },
-                error => console.error(error),
-                () => {
-            
-                }  
+                error => console.error(error)
             );
     
             amendementModule.fetch();
@@ -169,7 +180,7 @@ describe('[AmendementModule] Test suite for Amendement module',()=> {
             amendementModule.startjob(amendementModule.fetch, 60);
             expect(amendementModule).not.null;
             amendementModule.stopjob();
-            expect(amendementModule.cron).null
+            expect(amendementModule.cron).null;
         });
     
     });
