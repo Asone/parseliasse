@@ -38,13 +38,21 @@ export class AmdtDerouleurModule extends AbstractParseModule<Array<AmdtDerouleur
      */
     fetch = (): Promise<Array<AmdtDerouleurInterface>> => {
         const requestParams: string = this.prepare(this.params.requestParams);
-        return this.request(this.params.url + requestParams).then((amdtDerouleur: Array<AmdtDerouleurInterface>) => {
-            this.amdtDerouleur.next(amdtDerouleur);
-            return amdtDerouleur;
-        });
+        return this.request(this.params.url + requestParams).then(this.update.bind(this));
     }
 
-    
+    /**
+     * Updates the main object of sub-module
+     * 
+     * @param discussion The `AmdtDerouleurInterface` array object retrieved from request
+     * 
+     * @returns `AmdtDerouleurInterface` The amdtDerouleur array object retrieved from request 
+     */
+    update(amdtDerouleur: Array<AmdtDerouleurInterface>): Array<AmdtDerouleurInterface> {
+        this.amdtDerouleur.next(amdtDerouleur);
+        return amdtDerouleur;
+    }
+
     /**
      * Returns the AmdDerouleur object as an Observable
      * 

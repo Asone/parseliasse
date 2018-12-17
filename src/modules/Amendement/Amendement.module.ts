@@ -38,11 +38,20 @@ export class AmendementModule extends AbstractParseModule<AmendementsInterface>{
             throw new Error('requestParams.numAmdt can\'t be null. number or array of numbers must be provided.');
         } else {
             const requestParams: string = this.prepare(params);
-            return this.request(this.params.url + requestParams).then((amendement: AmendementsInterface): AmendementsInterface => {
-                this.amendement.next(amendement);
-                return amendement;
-            });
+            return this.request(this.params.url + requestParams).then(this.update.bind(this));
         }
+    }
+
+    /**
+     * Updates the main object of sub-modules
+     * 
+     * @param discussion The `AmendementsInterface` object retrieved from request
+     * 
+     * @returns `AmendementsInterface` The discussion retrieved from request 
+     */
+    update(amendement: AmendementsInterface): AmendementsInterface {
+        this.amendement.next(amendement);
+        return amendement;
     }
 
     /**
@@ -61,7 +70,7 @@ export class AmendementModule extends AbstractParseModule<AmendementsInterface>{
      * 
      * @todo : This method should be rewritten to implement automation of the string building process.
      * Additional notes : 
-     * - `AmdtDerouleurRequestParams` has no index signature which makes it impossible to keycast with `myvar[key]`.
+     * - `AmendementRequestParams` has no index signature which makes it impossible to keycast with `myvar[key]`.
      * - If added `[key:string]: any` in interface, object will accept any additional field, which we don't want. 
      * - Iteration on the interface keys with strict typing 
      * 
@@ -73,14 +82,14 @@ export class AmendementModule extends AbstractParseModule<AmendementsInterface>{
         params += '&bibardSuffixe=' + (requestParams.bibardSuffixe ? requestParams.bibardSuffixe : '');
         params += '&organeAbrv=' + requestParams.organeAbrv;
         if(requestParams.numAmdt) {
-                if(typeof requestParams.numAmdt === 'object'){
-                    requestParams.numAmdt.forEach((numAmdt: number): void => {
-                        params += '&numAmdt=' + numAmdt;
-                    });   
-                } else if (typeof requestParams.numAmdt === 'number') {
-                    params += '&numAmdt=' + requestParams.numAmdt;
-                }
+            if (typeof requestParams.numAmdt === 'number') {
+                params += '&numAmdt=' + requestParams.numAmdt;
+            } else {
+                requestParams.numAmdt.forEach((numAmdt: number): void => {
+                    params += '&numAmdt=' + numAmdt;
+                });    
             }
+        }
         params += requestParams.limit ? '&limit=' + requestParams.limit : '';
         params += requestParams.page ? '&page=' + requestParams.page : '';
         params += requestParams.start ? '&start=' + requestParams.start : '';
