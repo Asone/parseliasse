@@ -20,6 +20,14 @@ export declare class DiscussionModule extends AbstractParseModule<DiscussionInte
      */
     fetch: () => Promise<DiscussionInterface>;
     /**
+     * Updates the main object of sub-module
+     *
+     * @param discussion The `DiscussionInterface` object retrieved from request
+     *
+     * @returns `DiscussionInterface` The discussion retrieved from request
+     */
+    update(discussion: DiscussionInterface): DiscussionInterface;
+    /**
      * Returns the `Discussion` object as an `Observable`
      *
      * @returns Observable<Array<DiscussionInterface>>
@@ -32,7 +40,7 @@ export declare class DiscussionModule extends AbstractParseModule<DiscussionInte
      *
      * @todo : This method should be rewritten to implement automation of the string building process.
      * Additional notes :
-     * - `AmdtDerouleurRequestParams` has no index signature which makes it impossible to keycast with `myvar[key]`.
+     * - `DiscussionRequestParams` has no index signature which makes it impossible to keycast with `myvar[key]`.
      * - If added `[key:string]: any` in interface, object will accept any additional field, which we don't want.
      * - Iteration on the interface keys with strict typing
      *

@@ -20,6 +20,14 @@ export declare class AmdtDerouleurModule extends AbstractParseModule<Array<AmdtD
      */
     fetch: () => Promise<AmdtDerouleurInterface[]>;
     /**
+     * Updates the main object of sub-module
+     *
+     * @param discussion The `AmdtDerouleurInterface` array object retrieved from request
+     *
+     * @returns `AmdtDerouleurInterface` The amdtDerouleur array object retrieved from request
+     */
+    update(amdtDerouleur: Array<AmdtDerouleurInterface>): Array<AmdtDerouleurInterface>;
+    /**
      * Returns the AmdDerouleur object as an Observable
      *
      * @returns Observable<Array<AmdtDerouleurInterface>>

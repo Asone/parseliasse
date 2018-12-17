@@ -30,15 +30,23 @@ class AmdtDerouleurModule extends Abstract_1.AbstractParseModule {
          */
         this.fetch = () => {
             const requestParams = this.prepare(this.params.requestParams);
-            return this.request(this.params.url + requestParams).then((amdtDerouleur) => {
-                this.amdtDerouleur.next(amdtDerouleur);
-                return amdtDerouleur;
-            });
+            return this.request(this.params.url + requestParams).then(this.update.bind(this));
         };
         if (params)
             this.applyParams(params);
         if (params && params.cronjob)
             this.startjob(this.fetch, 60);
+    }
+    /**
+     * Updates the main object of sub-module
+     *
+     * @param discussion The `AmdtDerouleurInterface` array object retrieved from request
+     *
+     * @returns `AmdtDerouleurInterface` The amdtDerouleur array object retrieved from request
+     */
+    update(amdtDerouleur) {
+        this.amdtDerouleur.next(amdtDerouleur);
+        return amdtDerouleur;
     }
     /**
      * Returns the AmdDerouleur object as an Observable
