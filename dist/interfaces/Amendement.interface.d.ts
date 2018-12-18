@@ -2,7 +2,7 @@ export interface AmendementsInterface {
     amendements: AmendementInterface[];
 }
 export interface AmendementInterface {
-    numero: string;
+    numero: number;
     numeroLong: string;
     numeroReference: string;
     placeReference: string;
@@ -11,7 +11,7 @@ export interface AmendementInterface {
     exposeSommaire: string;
     listeDesSignataires: string;
     sortEnSeance: string;
-    bibard: string;
+    bibard: number;
     bibardSuffixe: string;
     legislature: string;
     organeAbrv: string;
