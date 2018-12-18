@@ -6,9 +6,9 @@ export interface DiscussionInterface {
 
 export interface AmdtsParOrdreDeDiscussionInterface {
     organe:           string;
-    bibard:           string;
+    bibard:           number;
     bibardSuffixe:    string;
-    legislature:      string;
+    legislature:      number;
     titre:            string;
     type:             string;
     divisions:        DivisionInterface[];

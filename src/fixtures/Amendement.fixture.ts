@@ -1,7 +1,7 @@
 import { AmendementsInterface } from '../interfaces/Amendement.interface';
 export const AmendementsFixture: AmendementsInterface = {
 	amendements: [{
-		numero: "1562",
+		numero: 1562,
 		numeroLong: "1562",
 		numeroReference: "1562",
 		placeReference: "Article 54",
@@ -10,7 +10,7 @@ export const AmendementsFixture: AmendementsInterface = {
 		exposeSommaire: "<p style=\"text-align: justify;\">Cet article pr&#233;voit que des cours d&#8217;appel puissent &#234;tre sp&#233;cialement d&#233;sign&#233;es par d&#233;cret pour juger, sur le ressort de plusieurs cours d&#8217;une m&#234;me r&#233;gion, les recours contre les d&#233;cisions des juridictions de premi&#232;re instance rendues dans les mati&#232;res civiles.</p>\n<p style=\"text-align: justify;\">La liste de ces mati&#232;res civiles est d&#233;termin&#233;e par d&#233;cret en Conseil d&#8217;&#201;tat et respectant des crit&#232;res l&#233;gislatifs li&#233;s &#224; la coll&#233;gialit&#233; et au volume d&#8217;affaires.</p>\n<p style=\"text-align: justify;\">Cet amendement de coh&#233;rence tend &#224; pr&#233;ciser ces crit&#232;res&#160;: cette liste doit viser des contentieux &#224; haute sp&#233;cificit&#233; juridique et &#224; tr&#232;s faible volum&#233;trie.</p>",
 		listeDesSignataires: " M.&#160;Molac,  M.&#160;Acquaviva, M.&#160;Cl&#233;ment, M.&#160;Philippe&#160;Vigier, M.&#160;Pancher, M.&#160;Brial, M.&#160;Castellani, M.&#160;Colombani, Mme&#160;Dubi&#233;, M.&#160;El Guerrab, M.&#160;Fran&#231;ois-Michel&#160;Lambert et Mme&#160;Pinel",
 		sortEnSeance: "Rejeté",
-		bibard: "1396",
+		bibard: 1396,
 		bibardSuffixe: "",
 		legislature: "15",
 		organeAbrv: "AN",
@@ -165,7 +165,7 @@ export const AmendementsFixture: AmendementsInterface = {
 			accord: null
 		}
 	}, {
-		numero: "316",
+		numero: 316,
 		numeroLong: "316",
 		numeroReference: "316",
 		placeReference: "Après l'article 54",
@@ -174,7 +174,7 @@ export const AmendementsFixture: AmendementsInterface = {
 		exposeSommaire: "<p style=\"line-height: 1.38; text-align: justify;\">Par cet amendement d&#8217;appel, nous proposons que soit exp&#233;riment&#233;e la mise en place de p&#244;les judiciaires sp&#233;cialis&#233;s dans la lutte contre les discrimination aupr&#232;s de Cours d&#8217;appel, ceux-ci incluant non seulement des magistrats du si&#232;ge et du parquet, des officiers de police judiciaire sp&#233;cialis&#233;s, mais aussi des associations de lutte contre les discrimination et des justiciables - ces derniers &#233;tant tir&#233;s au sort (voir ci-dessous).</p>\n<p style=\"line-height: 1.38; text-align: justify;\">La lutte contre toutes les formes de discrimination doit &#234;tre une priorit&#233; de la politique p&#233;nale. Pour ce faire, et pour cr&#233;er une r&#233;elle expertise en ce domaine, nous proposons d&#8217;exp&#233;rimenter la cr&#233;ation de p&#244;les judiciaires sp&#233;cialis&#233;s dans la lutte contre les discriminations. Ces p&#244;les, pour &#234;tre au plus pr&#232;s de la r&#233;alit&#233; des discriminations subies par la population, comprendront des repr&#233;sentants d&#8217;associations de lutte contre les discriminations et des justiciables tir&#233;s au sort.</p>\n<p style=\"line-height: 1.38; text-align: justify;\">En d&#233;tail&#160;:</p>\n<p style=\"line-height: 1.38; text-align: justify;\">De m&#234;me qu&#8217;en mati&#232;re de justice p&#233;nale, des citoyens sont tir&#233;.e.s au sort pour exercer les fonctions de jur&#233;s d&#8217;assises, de jur&#233;s populaires, nous proposons d&#8217;ouvrir la composition du coll&#232;ge de d&#233;ontologie de l&#8217;ordre judiciaire &#224; un justiciable et &#224; une justiciable. Pour ce faire, nous proposons que des justiciables soient tir&#233;s au sort.</p>",
 		listeDesSignataires: " Mme&#160;Obono,  Mme&#160;Autain, M.&#160;Bernalicis, M.&#160;Coquerel, M.&#160;Corbi&#232;re, Mme&#160;Fiat, M.&#160;Lachaud, M.&#160;Larive, M.&#160;M&#233;lenchon, Mme&#160;Panot, M.&#160;Prud&apos;homme, M.&#160;Quatennens, M.&#160;Ratenon, Mme&#160;Ressiguier, Mme&#160;Rubin, M.&#160;Ruffin et Mme&#160;Taurine",
 		sortEnSeance: "",
-		bibard: "1396",
+		bibard: 1396,
 		bibardSuffixe: "",
 		legislature: "15",
 		organeAbrv: "AN",
@@ -379,7 +379,7 @@ export const AmendementsFixture: AmendementsInterface = {
 			accord: null
 		}
 	}, {
-		numero: "259",
+		numero: 259,
 		numeroLong: "259",
 		numeroReference: "259",
 		placeReference: "Article 55",
@@ -388,7 +388,7 @@ export const AmendementsFixture: AmendementsInterface = {
 		exposeSommaire: "<p style=\"text-align: justify;\">Le pr&#233;sent projet de loi r&#233;vise profond&#233;ment les droits et pratiques des justiciables&#160;: il doit donc respecter les droits et libert&#233;s que la Constitution garantit&#160;; tant dans les lois de forme que les lois de fond.</p>\n<p style=\"text-align: justify;\">&#192; cette fin, il serait paradoxal que le Parlement n&#8217;&#233;puise pas sa comp&#233;tence, et qu&#8217;il confie au gouvernement une partie de la&#160;pr&#233;rogative principale que lui conf&#232;re l&#8217;article&#160;34 de la Constitution .</p>\n<p style=\"text-align: justify;\">Or, l&#8217;habilitation ici mentionn&#233;e vise &#224; prendre acte de l&#8217;institution des tribunaux judiciaires dans l&#8217;ensemble des textes en vigueur&#160;; sans pr&#233;ciser qu&#8217;elle devrait s&#8217;effectuer par ailleurs&#160;&#224; droit constant. Le champ de l&#8217;habilitation est donc ici trop extensif.</p>\n<p style=\"text-align: justify;\">De plus, il est un peu os&#233; de demander au l&#233;gislateur d&#8217;autoriser le gouvernement &#224;&#160;&#171;&#160;rem&#233;dier aux &#233;ventuelles erreurs et omissions de la pr&#233;sente loi&#160;&#187;&#160;: voil&#224; qui est peu flatteur vis &#224; vis de la repr&#233;sentation nationale .</p>",
 		listeDesSignataires: " M.&#160;Collard,  Mme&#160;Le Pen, M.&#160;Chenu, M.&#160;Bilde et M.&#160;Pajot",
 		sortEnSeance: "",
-		bibard: "1396",
+		bibard: 1396,
 		bibardSuffixe: "",
 		legislature: "15",
 		organeAbrv: "AN",

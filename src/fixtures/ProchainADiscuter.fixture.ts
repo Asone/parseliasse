@@ -10,7 +10,7 @@ export const ProchainADiscuterFixture: ProchainADiscuterInterface = {
     prochainADiscuter: { 
             bibard: 1396, 
             bibardSuffixe: "", 
-            numAmdt: "140", 
+            numAmdt: 140, 
             legislature: 15, 
             organeAbrv: "AN", 
             nbrAmdtRestant: "1" 
