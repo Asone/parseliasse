@@ -1,6 +1,6 @@
 # ParsEliasse
 
-Parseliasse est un projet de création de module Typescript afin de faciliter la récupération et le traitement des données distribuées par le programme Eliasse. 
+Parseliasse est une librairie JS pour les applications NodeJS permettant de faciliter la récupération et le traitement des données distribuées par le programme Eliasse. 
 
 Parseliasse est construit sous `nodeJS` en `Typescript`. 
 
@@ -14,7 +14,7 @@ npm i --save parseliasse
 
 ### Dépendances
 
-Le module `parseliasse` minimise au maximum l'appel à des dépendances tierces. De cette façon, celui-ci est moins exposé aux risques de bugs, de sécurité, et minimise le poids du module. 
+Le module `parseliasse` minimise au maximum l'appel aux dépendances tierces. De cette façon, celui-ci est moins exposé aux risques de bugs, de sécurité, et minimise le poids du module. 
 
 Les dépendances utilisées à ce jour dans le module sont les suivants : 
 
@@ -24,6 +24,17 @@ Les dépendances utilisées à ce jour dans le module sont les suivants :
 ## Utilisation
 
 ### Initialisation
+
+En javascript : 
+
+```javascript
+    require('parseliasse');
+
+    const eliasse = new Parseliasse();
+```
+
+En typescript :
+
 ```typescript
     import { Parseliasse, AmendementInterface } from 'parseliasse';
     import { Subscription } from 'rxjs';
@@ -36,7 +47,7 @@ Les dépendances utilisées à ce jour dans le module sont les suivants :
     });
 ```
 
-le module ParsEliasse n'est pour l'instant qu'un wrapper de sous-modules spécifique pour chacun des flux d'Eliasse. Il est possible d'appeler indépendemment chaque sous module : 
+ Il est possible d'appeler indépendemment chaque sous module, représentant chacun un flux d'Eliasse : 
 
 ```typescript 
     import { AmendementModule, AmdtDerouleurModule, DiscussionModule, ProchainADiscuterModule} from 'parseliasse'
@@ -49,9 +60,32 @@ le module ParsEliasse n'est pour l'instant qu'un wrapper de sous-modules spécif
 
 **Il est important de noter que pour le module `AmendementModule` doit obligatoirement avoir le paramètre numAmdt comme étant non nul et doit contenir un nombre ou un tableau de nombre pour pouvoir effectuer des requêtes** 
 
+
+exemple de récupération du prochain amendement qui sera discuté dans l'assemblée : 
+
+```javascript
+    const parseliasse = new Parseliasse();
+    parseliasse.autoconfig().then(() => {
+        parseliasse.prochainADiscuter.fetch().then((response) => {
+            // affiche l'objet ProchainADiscuter dans la console
+            console.log(response);
+        });
+    });
+
+```
+
 ### Configuration & paramètres par défaut
 
-Il est possible de configurer chaque module à l'initialisation que ce soit en instanciant chaque module séparemment ou en appelant le module global. 
+Pour suivre les amendements parlementaires en temps réel il est nécéssaire de savoir quelles sont les références des discussions en cours. 
+Il est possible de lancer une configuration automatique de parseliasse :
+
+```javascript
+    const parseliasse = new Parseliasse();
+    parseliasse.autoconfig();
+```
+
+
+Il est possible également de fournir pour une configuration à l'initialisation. 
 
 Le module global prend un objet de paramétrage qui est en fait une concaténation de l'ensemble des configurations pour chaque module : 
 
@@ -61,7 +95,8 @@ Le module global prend un objet de paramétrage qui est en fait une concaténati
             cron: false,
             url: 'http://www.assemblee-nationale.fr'
             requestParams : {
-                legislature: 15
+                legislature: 15,
+                ...
             }
         },
         amdtDerouleur: {
@@ -80,13 +115,16 @@ Les sous-modules peuvent également prendre un objet de paramétrage :
 
 ```typescript
     const maconfig = {
-        cron: true
+        cron: true,
+        ...
     }
 
     const amdtDerouleur = new AdmtDerouleurModule(maconfig);
 ```
 
 #### cronjobs 
+
+Il est possible de lancer pour chaque sous-module un cronjob qui récupérera le flux de manière automatisée à interval régulier. 
 
 les cronjobs ont les timings par défaut listés ci-dessous : 
 
@@ -108,12 +146,11 @@ discussion.startjob(discussion.fetch,30);
 
 ### Typages
 
-Le module ParsEliasse est entièrement typé. Les types sont embarqués dans le module et exposés afin de permettre de typer vos appels aux modules et données afin d'optimiser la cohérence de vos développements autour des données. 
+Le module ParsEliasse, développé initialement en Typescript, est entièrement typé. Les types sont embarqués dans le module et exposés afin de permettre de typer vos appels aux modules et données afin d'optimiser la cohérence de vos développements autour des données. 
 
-Chaque flux à ses propres interfaces. Ci-dessous, la liste des types racines pour chaque flux : 
+Les données de retours de l'API Eliasse sont également typées. 
 
-
-Vous pouvez trouver les interfaces dans le dossier `interfaces` du module;
+Vous pouvez trouver les interfaces dans le dossier [src/interfaces/](https://framagit.org/Asone/parseliasse/tree/master/src/interfaces) du module.
 
 ### Fonctionnalités
 
@@ -139,7 +176,7 @@ Si vous souhaitez soumettre des modifications/évolutions via une pull-request, 
 - Toute fonctionnalité doit être accompagnée des tests unitaires correspondants afin de garantir une maintenabilité optimale.
 - Le code doit être fortement typé, tant sur les inputs que les outputs pour garantir la cohérence des structures de données.
 - Le code doit être documenté en respectant le format [javadoc](https://openclassrooms.com/fr/courses/1115306-presentation-de-la-javadoc)
-- Le code doit fait appel le moins possible à des dépendances tierces. 
+- Le code doit faire appel le moins possible à des dépendances tierces. 
 
 
 Le dépôt parseliasse est publié sur [Framagit](https://framagit.org/Asone/parseliasse) ainsi que sur [Github](https://github.com/Asone/parseliasse). 
