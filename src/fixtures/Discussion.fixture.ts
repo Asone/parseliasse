@@ -9,9 +9,9 @@ import { DiscussionInterface, AmdtsParOrdreDeDiscussionInterface } from '../inte
 export const discussionFixture: DiscussionInterface = {
 	amdtsParOrdreDeDiscussion: {
 		organe: "AN",
-		bibard: 1396,
+		bibard: "1396",
 		bibardSuffixe: "",
-		legislature: 15,
+		legislature: "15",
 		titre: "Loi de programmation 2019-2022 et de réforme pour la justice",
 		type: "projet de loi",
 		divisions: [{

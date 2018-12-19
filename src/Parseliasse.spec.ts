@@ -180,11 +180,11 @@ describe('[ParsEliasse] Test suite for main ParsEliasse Module', () => {
 
         const prochainADiscuterResponse: ProchainADiscuterInterface  = {
             prochainADiscuter: {
-                bibard: 9999,
+                bibard: '9999',
                 bibardSuffixe: null,
                 numAmdt: '1',
                 nbrAmdtRestant: '1/999',
-                legislature: 99,
+                legislature: '99',
                 organeAbrv: 'SE'
             }
         };
