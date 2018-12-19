@@ -80,13 +80,13 @@ class AmendementModule extends Abstract_1.AbstractParseModule {
         params += '&bibardSuffixe=' + (requestParams.bibardSuffixe ? requestParams.bibardSuffixe : '');
         params += '&organeAbrv=' + requestParams.organeAbrv;
         if (requestParams.numAmdt) {
-            if (typeof requestParams.numAmdt === 'number') {
-                params += '&numAmdt=' + requestParams.numAmdt;
-            }
-            else {
+            if (typeof requestParams.numAmdt === 'object') {
                 requestParams.numAmdt.forEach((numAmdt) => {
                     params += '&numAmdt=' + numAmdt;
                 });
+            }
+            else {
+                params += '&numAmdt=' + requestParams.numAmdt;
             }
         }
         params += requestParams.limit ? '&limit=' + requestParams.limit : '';

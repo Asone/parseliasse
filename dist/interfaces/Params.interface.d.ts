@@ -22,7 +22,7 @@ export interface AmdtDerouleurRequestParams extends CommonEliasseInterface {
     page?: number;
 }
 export interface AmendementRequestParams extends CommonEliasseInterface {
-    numAmdt?: number | Array<number>;
+    numAmdt?: number | Array<number> | string;
     start?: number;
     limit?: number;
     page?: number;
