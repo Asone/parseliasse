@@ -4,14 +4,11 @@ import { UrlsInterface } from './interfaces/Urls.interface';
 import { AmdtDerouleurModule, AmendementModule, DiscussionModule, ProchainADiscuterModule } from './modules';
 import {  } from './modules/Amendement/Amendement.module';
 import { beforeEach } from 'mocha';
-import { ProchainADiscuterInterface } from '../dist/interfaces/ProchainADiscuter.interface';
 import { AmendementsFixture } from './fixtures/Amendement.fixture';
 import nock = require('nock');
-import { AmendementsInterface } from './interfaces';
+import { AmendementsInterface,  DiscussionInterface, AmdtDerouleurInterface, ProchainADiscuterInterface  } from './interfaces';
 import { amdtDerouleurFixture } from './fixtures/AmdtDerouleur.fixture';
-import { AmdtDerouleurInterface } from '../dist/interfaces/AmdtDerouleur.interface';
 import { discussionFixture } from './fixtures/Discussion.fixture';
-import { DiscussionInterface } from '../dist/interfaces/Discussion.interface';
 
 describe('[ParsEliasse] Test suite for main ParsEliasse Module', () => {
     
