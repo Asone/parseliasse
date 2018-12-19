@@ -27,7 +27,7 @@ export interface AmdtDerouleurRequestParams extends CommonEliasseInterface{
 }
 
 export interface AmendementRequestParams extends CommonEliasseInterface{
-    numAmdt?: number | Array<number>;
+    numAmdt?: number | Array<number> | string;
     start?: number;
     limit?: number;
     page?: number;
